@@ -20,6 +20,19 @@ code {
 .container{
   text-align: center;
 }
+.containerDetalhes{
+margin-top: 30px;
+width: 100vw;
+height: 50vh;
+justify-content: center;
+display: flex;
+}
+
+.containerPecaUnitaria{
+  border-radius:10%;
+  width: 500px;
+  background-color: white;
+}
 
 .excel-table {
   margin-top: 20px;
