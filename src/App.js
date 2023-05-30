@@ -1,6 +1,7 @@
 import React from 'react';
 import ExcelSpreadsheet from './lista';
 import logo from './img/logo.jpg';
+import SearchBar from './components/searchBar';
 
 const App = () => {
   return (

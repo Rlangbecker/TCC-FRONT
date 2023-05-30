@@ -11,7 +11,7 @@ class ObjectList extends Component {
         <thead>
           <tr>
             <th>Código</th>
-            <th>Grupo</th>
+            <th>Referência</th>
             <th>Descrição</th>
             <th>Preço de Venda</th>
             <th>Preço de Custo</th>
@@ -24,7 +24,7 @@ class ObjectList extends Component {
             data.map((objeto) => (
               <tr key={objeto.codigoPeca} onClick={() => onObjectClick(objeto)}>
                 <td>{objeto.codigoPeca}</td>
-                <td>{objeto.grupo}</td>
+                <td>{objeto.estoqueEntity.referenciaPeca}</td>
                 <td>{objeto.descricao}</td>
                 <td>{objeto.precoVenda}</td>
                 <td>{objeto.precoCusto}</td>
@@ -51,29 +51,33 @@ class ObjectDetails extends Component {
       <div className='containerDetalhes'>
         {objectDetails ? (
           <div className='containerPecaUnitaria'>
-            <table>
+            <table align='center'>
               <thead>
                 <td colSpan={6}>
-                  <h4>{objectDetails.descricao}</h4>
+                  <h4>{objectDetails.codigoPeca} - {objectDetails.descricao}</h4>
                 </td>
               </thead>
               <tr>
-                <th> <td colSpan={6}>Código: {objectDetails.codigoPeca}     Casa: {objectDetails.estoqueEntity.casaPeca}  </td></th>
+                <th> <td colSpan={6}>Casa: {objectDetails.estoqueEntity.casaPeca} </td></th>
               </tr>
               <tr>
-                <th><td colSpan={10}>Grupo: {objectDetails.grupo}  Última Venda: {objectDetails.ultimaVenda}</td></th>
+                <th><td colSpan={10}>Referência: {objectDetails.estoqueEntity.referenciaPeca}  </td></th>
+                </tr>
+                <tr>
+                <th><td colSpan={10}>Última Venda: {objectDetails.ultimaVenda}</td></th>
               </tr>
               <tr>
               <th><td colSpan={10}>Preço de Venda: {objectDetails.precoVenda}</td></th>
               </tr>
-              <tr>
-              <th><td colSpan={10}> Preço de Custo: {objectDetails.precoCusto}</td></th>
-              </tr>
-
 
             </table>
           </div>
-
+/**
+ * 
+ *  <tr>
+              <th><td colSpan={10}> Preço de Custo: {objectDetails.precoCusto}</td></th>
+              </tr>
+ */
 
         ) : (
           <p>Carregando detalhes do objeto...</p>
@@ -142,7 +146,9 @@ class ExcelSpreadsheet extends Component {
       if (selectedOption === 'codigo' && !Array.isArray(response.data)) {
         // Se a resposta não for uma matriz, transforma o objeto em um array com um único elemento
         this.setState({ data: [response.data] });
-      } else {
+      } else if (selectedOption === 'referencia' && !Array.isArray(response.data)){
+        this.setState({ data: [response.data] });
+      } else{
         this.setState({ data: response.data.elementos });
       }
     } catch (error) {

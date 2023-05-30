@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 const SearchBar = ({ onSearch, onBack, onSelectChange, onChange, selectedOption, searchTerm }) => {
     const handleSearch = () => {
       onSearch();

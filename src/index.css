@@ -21,17 +21,32 @@ code {
   text-align: center;
 }
 .containerDetalhes{
-margin-top: 30px;
+margin-top: 50px;
 width: 100vw;
-height: 50vh;
+height: 40vh;
 justify-content: center;
 display: flex;
 }
 
-.containerPecaUnitaria{
+.containerPecaUnitaria{ 
   border-radius:10%;
-  width: 500px;
+  width: 350px;
   background-color: white;
+}
+
+
+.containerPecaUnitaria table {
+  margin-top: 20px;
+  width: 80%;
+  border-collapse: collapse;
+}
+.containerPecaUnitaria th {
+  background-color: #a13e3ec0;
+  font-weight: bold;
+}
+
+.containerPecaUnitaria tr:nth-child(even) {
+  background-color: #727272;
 }
 
 .excel-table {
