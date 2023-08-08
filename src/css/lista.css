@@ -1,0 +1,16 @@
+.buttonPageable {
+    background-color: #d40303;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.buttonPageable :hover{
+    background-color:#f51313;
+}

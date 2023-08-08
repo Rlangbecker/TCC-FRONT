@@ -1,0 +1,45 @@
+.object-card-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center; 
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  
+  .object-card {
+    border: 1px solid #000000;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    width: 250px;
+    max-height: 300px;
+    overflow: hidden;
+  }
+  
+  .object-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #ff0000c7;
+  }
+  
+  .object-card h4 {
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .object-card .description {
+    max-width: 250px; /* Defina a altura máxima para a descrição */
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .object-card p {
+    margin: 5px 0;
+  }
+  

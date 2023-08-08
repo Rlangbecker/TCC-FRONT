@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
-const SearchBar = ({ onSearch, onBack, onSelectChange, onChange, selectedOption, searchTerm }) => {
+import React, {} from 'react';
+import '../css/searchBar.css';
+
+const SearchBar = ({ onSearch, onSelectChange, onChange, selectedOption, searchTerm }) => {
     const handleSearch = () => {
       onSearch();
-    };
-  
-    const handleBack = () => {
-      onBack();
     };
   
     const handleSelectChange = (event) => {
@@ -17,25 +15,22 @@ const SearchBar = ({ onSearch, onBack, onSelectChange, onChange, selectedOption,
     };
   
     return (
-      <div>
-        {onBack && (
-          <button className="backButton" onClick={handleBack}>
-            Voltar
-          </button>
-        )}
+      <div className="search-bar-container">
+        <div className="select-wrapper">
         <select value={selectedOption} onChange={handleSelectChange}>
           <option value="codigo">Código</option>
           <option value="referencia">Referência</option>
           <option value="nome">Nome</option>
         </select>
+        </div>
         <input
           type="text"
-          className="searchTerm"
+          className="search-input"
           value={searchTerm}
           onChange={handleChange}
-          placeholder="Digite um código de peça"
+          placeholder="Digite aqui"
         />
-        <button className="searchButton" onClick={handleSearch}>
+        <button className="search-button" onClick={handleSearch}>
           Pesquisar
         </button>
       </div>

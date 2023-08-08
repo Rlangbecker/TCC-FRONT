@@ -1,0 +1,19 @@
+
+/* Estilos gerais */
+.header-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: transparent;
+    padding: 10px 0;
+  }
+  
+  /* Estilos do texto */
+  .header-banner-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: red;
+    text-transform: uppercase;
+  }
+  

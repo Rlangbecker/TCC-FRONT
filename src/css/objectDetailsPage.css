@@ -1,0 +1,57 @@
+.containerDetalhes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .object-card-detail {
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 80%;
+    max-width: 80%; 
+    min-width: 30%;
+    text-align: center;
+    box-sizing: border-box; 
+  }
+  
+  .description-detail {
+    margin-top: 10px;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+  }
+  
+  .botaoVoltar {
+    background-color: #d40303;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 16px;
+    width: fit-content;
+    align-self: center;
+  }
+  
+  .botaoVoltar:hover {
+    background-color: #f51313;
+  }
+  
+
+  @media (max-width: 600px) {
+    .object-card-detail {
+      padding: 10px;
+    }
+    
+    .description-detail {
+      margin-top: 5px; 
+      padding-top: 5px; 
+    }
+    
+    .botaoVoltar {
+      margin-top: 5px;
+    }
+  }
+  

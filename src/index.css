@@ -49,27 +49,4 @@ display: flex;
   background-color: #727272;
 }
 
-.excel-table {
-  margin-top: 20px;
-  width: 100%;
-  border-collapse: collapse;
-}
 
-.excel-table th,
-.excel-table td {
-  padding: 8px;
-  text-align: left;
-}
-
-.excel-table th {
-  background-color: #742b2bc0;
-  font-weight: bold;
-}
-
-.excel-table tr:nth-child(even) {
-  background-color: #727272;
-}
-
-.excel-table tr:hover {
-  background-color: #77292946;
-}
