@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import SearchBar from './components/SearchBar';
 import ObjectCard from './components/ObjectCard';
 import './css/searchBar.css';
 import './css/lista.css';
 import ObjectDetailsPage from './components/ObjectDetailsPage';
+import NavigationMenu from './components/NavigationMenu';
 
-class ExcelSpreadsheet extends Component {
+class ListaDeProdutos extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data: [],
       currentPage: 0,
       pageSize: 20,
-      selectedOption: 'codigo',
-      searchTerm: '',
       selectedObject: null,
       showDetailsPage: false,
+      selectedOption: 'codigo',
+      searchTerm: '',
     };
   }
 
@@ -69,43 +69,29 @@ class ExcelSpreadsheet extends Component {
       console.error(error);
     }
   };
-  handleSearch = async () => {
-    const { searchTerm, selectedOption } = this.state;
-  
-    try {
-      let response;
-      if (searchTerm === '') {
-        response = await axios.get('http://192.168.0.244:8080/pecas');
-      } else if (selectedOption === 'codigo') {
-        response = await axios.get(`http://192.168.0.244:8080/pecas/codigo/${searchTerm}`);
-      } else if (selectedOption === 'referencia') {
-        response = await axios.get(`http://192.168.0.244:8080/pecas/referencia/${searchTerm}`);
-      } else if (selectedOption === 'nome') {
-        response = await axios.get(`http://192.168.0.244:8080/pecas/descricao/${searchTerm}`);
-      }
-      this.setState({ data: [response.data] });
-    } catch (error) {
-      console.error(error);
-    }
+
+  handleBack = () => {
+    this.setState({
+      searchedByCode: false,
+      currentPage: 0,
+      searchTerm: '',
+      data: [],
+    }, () => {
+      this.fetchPaginatedData();
+    });
   };
+
   render() {
-    const { data, selectedOption, searchTerm, selectedObject, currentPage, showDetailsPage } = this.state;
+    const { selectedOption, searchTerm, data, selectedObject, currentPage, showDetailsPage, searchedByCode } = this.state;
     const pageSize = this.state.pageSize;
 
     return (
       <div>
-        <SearchBar
-          onSearch={this.handleSearch}
-          onSelectChange={this.handleSelectChange}
-          onChange={this.handleChange}
-          selectedOption={selectedOption}
-          searchTerm={searchTerm}
-        />
+        <NavigationMenu u selectedOption={selectedOption} searchTerm={searchTerm} />
         {showDetailsPage ? (
           <div>
             <ObjectDetailsPage
               objectDetails={selectedObject}
-              match={{ params: { codigoPeca: selectedObject.codigoPeca } }}
               onBack={() => this.setState({ showDetailsPage: false, selectedObject: null })}
             />
           </div>
@@ -115,18 +101,11 @@ class ExcelSpreadsheet extends Component {
               <div className="object-card-list">
                 {data && data.length > 0 ? (
                   data.map((objeto) => (
-                    <div
-                      key={objeto.codigoPeca}
-                      onClick={() => this.handleObjectClick(objeto)}
-                      onBack={() => this.setState({ showDetailsPage: false, selectedObject: null })}
-                      style={{
-                        textDecoration: 'none',
-                        color: 'inherit',
-                      }}
-                      
-                    >
-                      <ObjectCard objeto={objeto} onObjectClick={this.handleObjectClick} 
-                      onBack={() => this.setState({ showDetailsPage: false, selectedObject: null })}/>
+                    <div key={objeto.codigoPeca}>
+                      <ObjectCard
+                        objeto={objeto}
+                        onObjectClick={() => this.handleObjectClick(objeto)}
+                      />
                     </div>
                   ))
                 ) : (
@@ -135,18 +114,23 @@ class ExcelSpreadsheet extends Component {
               </div>
             )}
             <div className="pagination-buttons">
-              <button className='buttonPageable'
-                onClick={() => this.handlePageChange(-1)}
-                disabled={currentPage === 0}
-              >
-                Anterior
-              </button>
-              <button className='buttonPageable'
-                onClick={() => this.handlePageChange(1)}
-                disabled={data.length < pageSize}
-              >
-                Próximo
-              </button>
+              <div className='pagination-buttons-container'>
+                {searchedByCode ? (
+                  <button className='buttonPageable' onClick={() => this.handleBack()}>
+                    Voltar
+                  </button>
+                ) : (
+                  <>
+                    <button className='buttonPageable' onClick={() => this.handlePageChange(-1)} disabled={currentPage === 0}>
+                      Anterior
+                    </button>
+                    <button className='buttonPageable' onClick={() => this.handlePageChange(1)} disabled={data.length < pageSize}>
+                      Próximo
+                    </button>
+                  </>
+
+                )}
+              </div>
             </div>
           </div>
         )}
@@ -154,5 +138,4 @@ class ExcelSpreadsheet extends Component {
     );
   }
 }
-
-export default ExcelSpreadsheet;
+export default ListaDeProdutos;

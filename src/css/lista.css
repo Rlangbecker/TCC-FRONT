@@ -14,3 +14,19 @@
 .buttonPageable :hover{
     background-color:#f51313;
 }
+
+.object-card-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-around;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.pagination-buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }

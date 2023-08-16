@@ -1,57 +1,117 @@
 .containerDetalhes {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-  }
-  
-  .object-card-detail {
-    background-color: #f5f5f5;
-    border: 1px solid #ccc;
-    padding: 20px;
-    width: 80%;
-    max-width: 80%; 
-    min-width: 30%;
-    text-align: center;
-    box-sizing: border-box; 
-  }
-  
-  .description-detail {
-    margin-top: 10px;
-    border-top: 1px solid #ccc;
-    padding-top: 10px;
-  }
-  
-  .botaoVoltar {
-    background-color: #d40303;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-    font-size: 16px;
-    width: fit-content;
-    align-self: center;
-  }
-  
-  .botaoVoltar:hover {
-    background-color: #f51313;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-x: hidden; /* Remova a rolagem horizontal da div principal */
+}
 
-  @media (max-width: 600px) {
-    .object-card-detail {
-      padding: 10px;
-    }
-    
-    .description-detail {
-      margin-top: 5px; 
-      padding-top: 5px; 
-    }
-    
-    .botaoVoltar {
-      margin-top: 5px;
-    }
+.object-card-detail {
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  padding: 20px;
+  width: 90%; /* Altere a largura para ocupar mais espaço em telas pequenas */
+  max-width: 800px; /* Defina um valor máximo */
+  margin-bottom: 20px; /* Adicionar espaço abaixo do container */
+  margin-top: 10px; /* Adicione espaço acima do container */
+  box-sizing: border-box;
+  text-align: center;
+  max-width: 100%;
+}
+
+.header_card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  max-width: 100%;
+}
+
+.codigoPeca {
+  max-width: 10%;
+  font-weight: bold;
+}
+
+.descricaoPeca {
+  text-align: center;
+  max-width: 100%;
+  word-break: break-word;
+}
+
+.description-detail {
+  margin-top: 10px;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+
+.botaoVoltar {
+  background-color: #d40303;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 16px;
+  width: fit-content;
+  align-self: center;
+}
+
+.botaoVoltar:hover {
+  background-color: #f51313;
+}
+
+.grid-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  max-width: 100%;
+}
+
+.grid-tabela-container {
+  width: 100%;
+  overflow-x: auto; /* Adicione rolagem horizontal à div da tabela */
+  max-width: 100%; /* Certifique-se de que a div não exceda a largura máxima */
+}
+
+.linha {
+  border-bottom: 1px solid #ccc;
+  max-width: 100%; /* Define a largura máxima para as linhas */
+  overflow-x: auto;
+}
+
+.coluna {
+  padding: 10px;
+  text-align: center;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  max-height: 100px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-height: 100%;
+}
+
+.coluna h4 {
+  margin: 0;
+}
+
+.coluna p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+/* Estilos para telas menores */
+@media (max-width: 600px) {
+  .coluna {
+    padding: 5px;
+    font-size: 12px;
   }
-  
+
+  .object-card-detail {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+}

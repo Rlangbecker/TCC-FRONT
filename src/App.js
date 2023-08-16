@@ -1,14 +1,27 @@
-import React from 'react';
-import ExcelSpreadsheet from './lista';
-import logo from './img/logo.jpg';
+import React, { Component } from 'react';
+import Lista from './lista';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import NavigationMenu from './components/NavigationMenu';
+import AppRouter from './router/AppRouter';
 
-const App = () => {
-  return (
-    <div className='container'>
-      <img src={logo} alt='logo' />
-      <ExcelSpreadsheet />
-    </div>
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedOption: 'codigo',
+      searchTerm: '',
+    };
+  }
+
+  render() {
+    const { selectedOption, searchTerm } = this.state;
+
+    return (
+      <div className='container'>
+        <AppRouter/>
+      </div>
     );
-};
+  };
+}
 
 export default App;

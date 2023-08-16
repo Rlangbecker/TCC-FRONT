@@ -1,69 +1,125 @@
-import React, { Component } from 'react';
+import React, { useState,useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; // Importe o Link para criar um link para a página inicial
+import { Link, useParams, useNavigate } from 'react-router-dom'; // Importe o Link e useParams
 import '../css/objectDetailsPage.css';
 
-class ObjectDetailsPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      objectDetails: null,
-    };
-  }
+const ObjectDetailsPage = (props) => { // Recebendo props como parâmetro
+  const { codigoPeca } = useParams();
+  const [objectDetails, setObjectDetails] = useState(null);
+  const history = useNavigate();
 
-  componentDidMount() {
-    this.fetchObjectDetails();
-  }
+  useEffect(() => {
+    fetchObjectDetails();
+  }, []);
 
-  fetchObjectDetails = async () => {
-    const { codigoPeca } = this.props.match.params;
-
+  const fetchObjectDetails = async () => {
     try {
       const response = await axios.get(`http://192.168.0.244:8080/pecas/codigo/${codigoPeca}`);
       const objectDetails = response.data;
-      this.setState({ objectDetails });
+      setObjectDetails(objectDetails);
     } catch (error) {
       console.error(error);
     }
   };
 
-  render() {
-    const { objectDetails } = this.state;
-
-    return (
-      <div>
-        {objectDetails ? (
-          <div className='containerDetalhes'>
-            <div className="object-card-detail">
-              <h3>{objectDetails.codigoPeca}</h3>
-              <div className="description-detail">
-                <h4>{objectDetails.descricao}</h4>
-              </div>
-              <h4><p>Referência: {objectDetails.estoqueEntity.referenciaPeca}</p></h4>
-              <h4><p>Estoque: {objectDetails.estoqueEntity.casaPeca}</p></h4>
-              <p>Preço de venda: {objectDetails.precoVenda}</p>
-              <p>Preço de custo: {objectDetails.precoCusto}</p>
-              <p>Última Venda: {objectDetails.ultimaVenda}</p>
-              {objectDetails.ultimoFornecedor && (
-                <div className='ultimoFornecedor'>
-                  <h4>Último Fornecedor:</h4>
-                  <p>{objectDetails.ultimoFornecedor.nome} / {objectDetails.ultimoFornecedor.nomeFantasia}</p>
-                  <p>CNPJ: {objectDetails.ultimoFornecedor.cnpj}</p>
-                
-                </div>
-              )}
+  const handleBack = () => {
+    history('/inicio') // Use o método goBack para voltar para a página anterior
+  };
+  
+  return (
+    <div>
+      {objectDetails ? (
+        <div className='containerDetalhes'>
+          <div className="object-card-detail">
+            <div className='header_card'>
+              <p className='codigoPeca'>{objectDetails.codigoPeca}</p>
+              <p className='descricaoPeca'>{objectDetails.descricao}</p>
             </div>
-            <button className='botaoVoltar' onClick={this.props.onBack}>Voltar</button>
+            <div className="description-detail">
+              <div className='grid-tabela-container'>
+                <table className='grid-tabela'>
+                  <tbody>
+                    <tr className='linha'>
+                      <td className='coluna'>
+                        <h4>Referência:</h4>
+                      </td>
+                      <td className='coluna'>
+                        <p>{objectDetails.estoqueEntity.referenciaPeca}</p>
+                      </td>
+                    </tr>
+
+                    <tr className='linha'>
+                      <td className='coluna'>
+                        <h4>Casa:</h4>
+                      </td>
+                      <td className='coluna'>
+                        <p>{objectDetails.estoqueEntity.casaPeca}</p>
+                      </td>
+                    </tr>
+
+                    <tr className='linha'>
+                      <td className='coluna'>
+                        <h4>Quantidade:</h4>
+                      </td>
+                      <td className='coluna'>
+                        <p>{objectDetails.estoqueEntity.quantidadePeca}</p>
+                      </td>
+                    </tr>
+
+                    <tr className='linha'>
+                      <td className='coluna'>
+                        <h4>Preço de venda:</h4>
+                      </td>
+                      <td className='coluna'>
+                        <p>{objectDetails.precoVenda}</p>
+                      </td>
+                    </tr>
+
+                    <tr className='linha'>
+                      <td className='coluna'>
+                        <h4>Preço de custo:</h4>
+                      </td>
+                      <td className='coluna'>
+                        <p>{objectDetails.precoCusto}</p>
+                      </td>
+                    </tr>
+
+                    <tr className='linha'>
+                      <td className='coluna'>
+                        <h4>Última Venda:</h4>
+                      </td>
+                      <td className='coluna'>
+                        <p>{objectDetails.ultimaVenda}</p>
+                      </td>
+                    </tr>
+                  </tbody>
+
+                  {objectDetails.ultimoFornecedor && (
+
+                    <tr className='linha'>
+                      <td className='coluna'>
+                        <h4>Último Fornecedor:</h4>
+                      </td>
+                      <td className='coluna'>
+                        <p>{objectDetails.ultimoFornecedor.nome}</p>
+                      </td>
+                    </tr>
+
+                  )}
+                </table>
+              </div>
+            </div>
           </div>
-        ) : (
-          <div>
+          <button className='botaoVoltar' onClick={handleBack}>Voltar</button>
+        </div>
+      ) : (
+        <div>
           <p>Carregando detalhes do objeto...</p>
-          <button className='botaoVoltar' onClick={this.props.onBack}>Voltar</button>
-          </div>
-        )}
-      </div>
-    );
-  }
+          <button className='botaoVoltar' onClick={handleBack}>Voltar</button>
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default ObjectDetailsPage;
