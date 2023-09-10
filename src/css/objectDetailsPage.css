@@ -1,22 +1,22 @@
 .containerDetalhes {
-  display: flex;
+  margin-top: 0;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   height: 100vh;
+  width: 100vw;
   padding: 20px;
   box-sizing: border-box;
-  overflow-x: hidden; /* Remova a rolagem horizontal da div principal */
+  overflow-x: hidden;
 }
 
 .object-card-detail {
   background-color: #f5f5f5;
   border: 1px solid #ccc;
   padding: 20px;
-  width: 90%; /* Altere a largura para ocupar mais espaço em telas pequenas */
-  max-width: 800px; /* Defina um valor máximo */
-  margin-bottom: 20px; /* Adicionar espaço abaixo do container */
-  margin-top: 10px; /* Adicione espaço acima do container */
+  width: 90%;
+  max-width: 600px;
+  margin-bottom: 20px;
   box-sizing: border-box;
   text-align: center;
   max-width: 100%;
@@ -28,33 +28,47 @@
   gap: 10px;
   transition: transform 0.2s, box-shadow 0.2s;
   max-width: 100%;
+  text-align: center;
+}
+
+.table_header {
+  display: flex;
+  width: 100vw;
+}
+
+.table_header tr:first {
+  max-width: 20%;
+  float: left;
+}
+
+.table_header tr:last-child {
+  max-width: 80%;
+  float: right;
 }
 
 .codigoPeca {
-  max-width: 10%;
   font-weight: bold;
+  text-align: center;
 }
 
 .descricaoPeca {
   text-align: center;
-  max-width: 100%;
   word-break: break-word;
 }
 
 .description-detail {
-  margin-top: 10px;
   border-top: 1px solid #ccc;
   padding-top: 10px;
 }
 
 .botaoVoltar {
+  display: flexbox;
   background-color: #d40303;
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 10px;
   font-size: 16px;
   width: fit-content;
   align-self: center;
@@ -72,13 +86,13 @@
 
 .grid-tabela-container {
   width: 100%;
-  overflow-x: auto; /* Adicione rolagem horizontal à div da tabela */
-  max-width: 100%; /* Certifique-se de que a div não exceda a largura máxima */
+  overflow-x: auto;
+  max-width: 100%;
 }
 
 .linha {
   border-bottom: 1px solid #ccc;
-  max-width: 100%; /* Define a largura máxima para as linhas */
+  max-width: 100%;
   overflow-x: auto;
 }
 
@@ -94,6 +108,13 @@
   max-height: 100%;
 }
 
+.colunaPrimaria {
+  border: 1px solid #ccc;
+  max-width: 50px;
+  padding: 5px;
+  justify-content: center;
+}
+
 .coluna h4 {
   margin: 0;
 }
@@ -103,7 +124,7 @@
   font-size: 14px;
 }
 
-/* Estilos para telas menores */
+
 @media (max-width: 600px) {
   .coluna {
     padding: 5px;

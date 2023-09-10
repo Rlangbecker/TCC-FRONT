@@ -21,12 +21,9 @@
   width: 250px;
   max-width: 300px;
   height: 200px;
-  /* Defina uma altura fixa para todos os cards */
   display: flex;
   flex-direction: column;
-  /* Para alinhar o conteúdo verticalmente */
   justify-content: space-between;
-  /* Para espalhar o conteúdo verticalmente */
   margin: 0 auto;
   margin-bottom: 20px;
   color: black;
@@ -38,7 +35,6 @@
 }
 
 .header_card {
-  display: grid;
   justify-content: space-between;
   align-items: center;
 }

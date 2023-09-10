@@ -12,7 +12,7 @@ class ListaDeProdutos extends Component {
     this.state = {
       data: [],
       currentPage: 0,
-      pageSize: 20,
+      pageSize: 24,
       selectedObject: null,
       showDetailsPage: false,
       selectedOption: 'codigo',
@@ -28,7 +28,7 @@ class ListaDeProdutos extends Component {
     const { currentPage, pageSize } = this.state;
 
     try {
-      const response = await axios.get('http://192.168.0.244:8080/pecas', {
+      const response = await axios.get('http://localhost:8080/pecas', {
         params: {
           pagina: currentPage,
           tamanho: pageSize,
@@ -62,7 +62,7 @@ class ListaDeProdutos extends Component {
 
   handleObjectClick = async (objeto) => {
     try {
-      const response = await axios.get(`http://192.168.0.244:8080/pecas/codigo/${objeto.codigoPeca}`);
+      const response = await axios.get(`http://localhost:8080/pecas/codigo/${objeto.codigoPeca}`);
       const objectDetails = response.data;
       this.setState({ selectedObject: objectDetails, showDetailsPage: true });
     } catch (error) {

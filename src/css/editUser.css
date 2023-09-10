@@ -1,0 +1,37 @@
+.edituser {
+    width: 100%;
+}
+
+.page_container {
+    display: flex;
+    justify-content: space-between;
+    max-height: 100vh;
+    background-color: pink;
+}
+
+.container_content_menu {
+    display: flex;
+    flex: 1;
+}
+
+.menu_edit {
+    padding: 50px;
+    background-color: rgba(255, 255, 255, 0.884);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    max-width: 10%;
+    width: 10%;
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.content {
+    flex: 1;
+    height: 200px;
+    background-color: aqua;
+    padding: 20px;
+    box-sizing: border-box;
+}

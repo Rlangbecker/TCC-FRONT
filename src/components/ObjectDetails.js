@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../css/objectDetails.css'
 
 class ObjectDetails extends Component {
   render() {
@@ -13,7 +14,6 @@ class ObjectDetails extends Component {
             <p>Referência: {objectDetails.estoqueEntity.referenciaPeca}</p>
             <p>Última Venda: {objectDetails.ultimaVenda}</p>
             <p>Preço de Venda: {objectDetails.precoVenda}</p>
-            {/* Add more details if needed */}
           </div>
         ) : (
           <p>Carregando detalhes do objeto...</p>

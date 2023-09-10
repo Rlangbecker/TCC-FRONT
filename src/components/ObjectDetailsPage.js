@@ -1,12 +1,16 @@
 import React, { useState,useEffect } from 'react';
 import axios from 'axios';
-import { Link, useParams, useNavigate } from 'react-router-dom'; // Importe o Link e useParams
+import { Link, useParams, useNavigate } from 'react-router-dom'; 
+import NavigationMenu from './NavigationMenu';
 import '../css/objectDetailsPage.css';
 
-const ObjectDetailsPage = (props) => { // Recebendo props como parâmetro
+const ObjectDetailsPage = (props) => {
   const { codigoPeca } = useParams();
   const [objectDetails, setObjectDetails] = useState(null);
   const history = useNavigate();
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedOption, setSelectedOption] = useState('codigo'); 
 
   useEffect(() => {
     fetchObjectDetails();
@@ -14,7 +18,7 @@ const ObjectDetailsPage = (props) => { // Recebendo props como parâmetro
 
   const fetchObjectDetails = async () => {
     try {
-      const response = await axios.get(`http://192.168.0.244:8080/pecas/codigo/${codigoPeca}`);
+      const response = await axios.get(`http://localhost:8080/pecas/codigo/${codigoPeca}`);
       const objectDetails = response.data;
       setObjectDetails(objectDetails);
     } catch (error) {
@@ -23,11 +27,12 @@ const ObjectDetailsPage = (props) => { // Recebendo props como parâmetro
   };
 
   const handleBack = () => {
-    history('/inicio') // Use o método goBack para voltar para a página anterior
+    history('/inicio')
   };
-  
+
   return (
     <div>
+      <NavigationMenu u selectedOption={selectedOption} searchTerm={searchTerm} />
       {objectDetails ? (
         <div className='containerDetalhes'>
           <div className="object-card-detail">
@@ -40,7 +45,7 @@ const ObjectDetailsPage = (props) => { // Recebendo props como parâmetro
                 <table className='grid-tabela'>
                   <tbody>
                     <tr className='linha'>
-                      <td className='coluna'>
+                      <td className='colunaPrimaria'>
                         <h4>Referência:</h4>
                       </td>
                       <td className='coluna'>
@@ -49,7 +54,7 @@ const ObjectDetailsPage = (props) => { // Recebendo props como parâmetro
                     </tr>
 
                     <tr className='linha'>
-                      <td className='coluna'>
+                      <td className='colunaPrimaria'>
                         <h4>Casa:</h4>
                       </td>
                       <td className='coluna'>
@@ -58,7 +63,7 @@ const ObjectDetailsPage = (props) => { // Recebendo props como parâmetro
                     </tr>
 
                     <tr className='linha'>
-                      <td className='coluna'>
+                      <td className='colunaPrimaria'>
                         <h4>Quantidade:</h4>
                       </td>
                       <td className='coluna'>
@@ -67,7 +72,7 @@ const ObjectDetailsPage = (props) => { // Recebendo props como parâmetro
                     </tr>
 
                     <tr className='linha'>
-                      <td className='coluna'>
+                      <td className='colunaPrimaria'>
                         <h4>Preço de venda:</h4>
                       </td>
                       <td className='coluna'>
@@ -76,7 +81,7 @@ const ObjectDetailsPage = (props) => { // Recebendo props como parâmetro
                     </tr>
 
                     <tr className='linha'>
-                      <td className='coluna'>
+                      <td className='colunaPrimaria'>
                         <h4>Preço de custo:</h4>
                       </td>
                       <td className='coluna'>
@@ -85,7 +90,7 @@ const ObjectDetailsPage = (props) => { // Recebendo props como parâmetro
                     </tr>
 
                     <tr className='linha'>
-                      <td className='coluna'>
+                      <td className='colunaPrimaria'>
                         <h4>Última Venda:</h4>
                       </td>
                       <td className='coluna'>
@@ -97,7 +102,7 @@ const ObjectDetailsPage = (props) => { // Recebendo props como parâmetro
                   {objectDetails.ultimoFornecedor && (
 
                     <tr className='linha'>
-                      <td className='coluna'>
+                      <td className='colunaPrimaria'>
                         <h4>Último Fornecedor:</h4>
                       </td>
                       <td className='coluna'>

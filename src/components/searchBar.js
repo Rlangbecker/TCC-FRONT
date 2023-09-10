@@ -17,13 +17,13 @@ const SearchBar = ({ onSearch }) => {
   const handleSearch = async () => {
     try {
       if (searchTerm === '') {
-        await axios.get('http://192.168.0.244:8080/pecas');
+        await axios.get('http://localhost:8080/pecas');
       } else if (selectedOption === 'codigo') {
         onSearch(searchTerm, selectedOption); // Passa searchTerm e selectedOption para onSearch
       } else if (selectedOption === 'referencia') {
-        await axios.get(`http://192.168.0.244:8080/pecas/referencia/${searchTerm}`);
+        await axios.get(`http://localhost:8080/pecas/referencia/${searchTerm}`);
       } else if (selectedOption === 'nome') {
-        await axios.get(`http://192.168.0.244:8080/pecas/descricao/${searchTerm}`);
+        await axios.get(`http://localhost:8080/pecas/descricao/${searchTerm}`);
       }
     } catch (error) {
       console.error(error);
