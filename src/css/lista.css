@@ -1,3 +1,9 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .buttonPageable {
     background-color: #d40303;
     color: white;
@@ -21,6 +27,8 @@
     justify-content:space-around;
     margin-top: 30px;
     margin-bottom: 30px;
+    justify-content: center;
+    gap: 10px;
 }
 
 .pagination-buttons-container {

@@ -12,7 +12,7 @@ class ListaDeProdutos extends Component {
     this.state = {
       data: [],
       currentPage: 0,
-      pageSize: 24,
+      pageSize: 21,
       selectedObject: null,
       showDetailsPage: false,
       selectedOption: 'codigo',
@@ -21,12 +21,13 @@ class ListaDeProdutos extends Component {
   }
 
   componentDidMount() {
+    console.log('ListaDeProdutos componentDidMount');
     this.fetchPaginatedData();
   }
 
   fetchPaginatedData = async () => {
     const { currentPage, pageSize } = this.state;
-
+  
     try {
       const response = await axios.get('http://localhost:8080/pecas', {
         params: {
@@ -36,11 +37,13 @@ class ListaDeProdutos extends Component {
           order: 0,
         },
       });
+      console.log('Dados buscados:', response.data);
       this.setState({ data: response.data.elementos });
     } catch (error) {
-      console.error(error);
+      console.error('Erro ao buscar dados:', error);
     }
   };
+  
 
   handlePageChange = (amount) => {
     this.setState(

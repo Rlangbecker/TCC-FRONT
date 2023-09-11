@@ -1,25 +1,53 @@
-import React, { useState } from 'react';
-import { useHistory, useNavigate } from 'react-router-dom';
-import '../css/login.css'; // Certifique-se de que o caminho do arquivo CSS está correto
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
+import '../css/login.css';
 
 function Login() {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [login, setLogin] = useState('');
+    const [senha, setSenha] = useState('');
+    const [token, setToken] = useState('');
+    const [role, setRole] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const history = useNavigate();
+    const navigate = useNavigate();
 
-    const handleLogin = () => {
-        // Lógica de autenticação aqui
-        if (username === 'Ricardo' && password === '12345') {
+    useEffect(() => {
+        const storedToken = localStorage.getItem('token');
+        if (storedToken) {
+            setToken(storedToken);
+            navigate('/inicio');
+        }
+    }, [navigate]);
+
+    const handleLogin = async () => {
+        const response = await fetch('http://localhost:8080/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ login, senha }),
+        });
+
+        if (response.status === 200) {
+            const token = await response.text();
+            setToken(token);
+            localStorage.setItem('token', token)
+            const decodedToken = jwtDecode(token);
+    
+            if (decodedToken && decodedToken.role) { // Verifique se role está presente no token
+                setRole(decodedToken.role);
+            }
+        
             alert('Login bem-sucedido!');
-            history('/inicio')
+            navigate('/inicio');
         } else {
-            setErrorMessage('Login falhou. Verifique suas credenciais.');
+            const errorData = await response.json();
+            setErrorMessage(errorData.message || 'Login falhou. Verifique suas credenciais.');
         }
     };
 
     const handleInputChange = () => {
-        setErrorMessage(''); // Limpa a mensagem de erro ao começar a digitar
+        setErrorMessage('');
     };
 
     return (
@@ -32,18 +60,18 @@ function Login() {
                 <input
                     type="text"
                     placeholder="Usuário"
-                    value={username}
+                    value={login}
                     onChange={(e) => {
-                        setUsername(e.target.value);
+                        setLogin(e.target.value);
                         handleInputChange();
                     }}
                 />
                 <input
                     type="password"
                     placeholder="Senha"
-                    value={password}
+                    value={senha}
                     onChange={(e) => {
-                        setPassword(e.target.value);
+                        setSenha(e.target.value);
                         handleInputChange();
                     }}
                 />

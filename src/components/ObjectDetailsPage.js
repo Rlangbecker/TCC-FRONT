@@ -37,8 +37,8 @@ const ObjectDetailsPage = (props) => {
         <div className='containerDetalhes'>
           <div className="object-card-detail">
             <div className='header_card'>
-              <p className='codigoPeca'>{objectDetails.codigoPeca}</p>
-              <p className='descricaoPeca'>{objectDetails.descricao}</p>
+             <div className='codigoPeca'> <p >{objectDetails.codigoPeca}</p></div>
+             <div className='descricaoPeca'><p>{objectDetails.descricao}</p></div>
             </div>
             <div className="description-detail">
               <div className='grid-tabela-container'>

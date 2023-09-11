@@ -1,33 +1,43 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from './searchBar';
-import {useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 import '../css/navigationMenu.css';
+import imgConfig from '../img/roda-dentada.png';
+import LogoutService from '../function_logout';
 
 function NavigationMenu() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false); // Adicione o estado para o dropdown
   const history = useNavigate();
-  const [searchTerm, setSearchTerm] = useState(''); // Adicionar estado para searchTerm
-  const [selectedOption, setSelectedOption] = useState('codigo'); // Adicionar estado para selectedOption
-
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedOption, setSelectedOption] = useState('codigo');
 
   const handleMenuToggle = () => {
     setMenuOpen(!menuOpen);
   };
 
-  const handleSearch = async (term,option) => {
+  const handleSearch = async (term, option) => {
     setSearchTerm(term);
     setSelectedOption(option);
 
-      if (searchTerm === '') {
-        history(`/inicio`)
-      } else if (selectedOption === 'codigo') {
-        history(`/detalhes/${term}`);
-      } else if (selectedOption === 'referencia') {
-        history(`/referencia/${term}`);
-      } else if (selectedOption === 'nome') {
-        history(`/descricao/${searchTerm}`);
-      }
+    if (searchTerm === '') {
+      history(`/inicio`);
+    } else if (selectedOption === 'codigo') {
+      history(`/detalhes/${term}`);
+    } else if (selectedOption === 'referencia') {
+      history(`/referencia/${term}`);
+    } else if (selectedOption === 'nome') {
+      history(`/descricao/${searchTerm}`);
+    }
+  };
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
+  const handleLogout = () => {
+    LogoutService.logout(); // Chame a função de logout da classe LogoutService
   };
 
   return (
@@ -47,11 +57,20 @@ function NavigationMenu() {
           <Link to="/inicio">Início</Link>
         </li>
         <li>
-          <Link to="/configuracoes">Configurações</Link>
+      
+        </li>
+        <li className="dropdown" onClick={toggleDropdown}>
+          <img className="img_config" src={imgConfig} alt="Configurações" />
+          <div className={`dropdown-content ${dropdownOpen ? 'show' : ''}`}>
+            <Link to="/novo-usuario">Criar Usuario</Link>
+            <a href="#">Editar Usuario</a>
+            <a href="#">Seus dados</a>
+            <a href="#" onClick={handleLogout}>Sair</a> {/* Chame handleLogout ao clicar em "Sair" */}
+          </div>
         </li>
       </ul>
-      <div className='containerSearch'>
-      <SearchBar onSearch={handleSearch}/>
+      <div className="containerSearch">
+        <SearchBar onSearch={handleSearch} />
       </div>
     </nav>
   );
