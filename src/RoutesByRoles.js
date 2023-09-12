@@ -22,6 +22,14 @@ export function DetailsRoute() {
     }
 }
 
+export function UserDetaisRoute() {
+    const { roles } = useAuth();
+
+    if (roles.length > 0) {
+        return roles.some((role) => role === 'ROLE_ADMIN'|| role === 'ROLE_ATENDENTE') ?(<Outlet />) : <Navigate to='/inicio' />
+    }
+}
+
 export function NewUserRoute() {
     const { roles } = useAuth();
 

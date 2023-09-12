@@ -9,6 +9,7 @@ import * as InternalRoutes from '../ExportRoutes';
 import { AuthProvider } from '../AuthContext';
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import UserProfile from '../UserProfile';
 
 
 function AppRouter() {
@@ -27,6 +28,10 @@ function AppRouter() {
               <Route
                 path="/detalhes/:codigoPeca"
                 element={<ObjectDetailsPage />} />
+
+              <Route
+                path="/meus-dados"
+                element={<UserProfile />} />
 
               <Route element={<InternalRoutes.NewUserRoute />}>
                 <Route

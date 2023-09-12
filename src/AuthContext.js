@@ -7,6 +7,7 @@ export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const [roles, setRole] = useState([]);
+  const [ nome, setNome] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async (login, senha) => {
@@ -22,10 +23,13 @@ export const AuthProvider = ({ children }) => {
         console.log(decodedToken.CARGOS);
         setRole(decodedToken.CARGOS);
         localStorage.setItem('role', decodedToken.CARGOS)
+        localStorage.setItem('sub',decodedToken.sub)
+        localStorage.setItem('nome',decodedToken.Nome)
+  
         navigate('/inicio');
 
-        toast.success("Logado com sucesso!", {
-          position: "bottom-right",
+        toast.success('Bem vindo ' + localStorage.getItem('nome') ,{
+          position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,

@@ -46,11 +46,6 @@
   max-width: 100%;
 }
 
-
-.colunaPrimaria:first-child p {
-  background-color:  #f09e9e;
-}
-
 .codigoPeca{
   font-weight: bold;
 }

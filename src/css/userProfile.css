@@ -1,0 +1,82 @@
+
+.user-form {
+    width: 600px;
+    margin: 0 auto;
+    margin-top: 50px;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+
+  .user-form h2{
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .form-group {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .form-group .button-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+  }
+  
+  p {
+    margin: 0;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  strong {
+    font-weight: bold;
+  }
+  .change-password-button {
+    background-color: #d40303;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+    display: block;
+    margin: 10px auto; 
+  }
+  
+.save-password-button,
+.cancel-password-button {
+  background-color: #d40303;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+  
+  .save-password-button:hover,
+  .change-password-button:hover {
+    background-color: #eb5959;
+  }
+  
+ label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .inputProfile {
+    width: 40%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+  }
+  

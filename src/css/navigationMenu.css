@@ -10,7 +10,8 @@ nav {
     padding: 10px 0;
     position: relative;
     width: 99,99vw;
-    height: 14vh;
+    height: 7vh;
+    min-height: 80px;
     top: 0;
     text-align: center;
 }

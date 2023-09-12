@@ -3,7 +3,7 @@ import NavigationMenu from './components/NavigationMenu';
 import { toast } from "react-toastify";
 import './css/novoUsuario.css';
 
-function NovoUsuario() {
+const NovoUsuario = () => {
     const [nome, setName] = useState('');
     const [login, setLogin] = useState('');
     const [senha, setPassword] = useState('');
@@ -73,69 +73,35 @@ function NovoUsuario() {
             }
         } catch (error) {
             console.error('Erro ao registrar usuário:', error);
-            showMessage('Erro ao registrar usuário. Tente novamente mais tarde.');
         }
     };
 
-    const showMessage = (text) => {
-        setMessage(text);
-        setShowPopup(true);
-
-        let timer = 5; 
-        setSecondsLeft(timer);
-
-        const countdown = setInterval(() => {
-            timer--;
-            setSecondsLeft(timer);
-
-            if (timer === 0) {
-                clearInterval(countdown); 
-                setMessage('');
-                setShowPopup(false);
-            }
-        }, 1000);
-    };
-
-    const closePopup = () => {
-        setMessage('');
-        setShowPopup(false);
-    };
-
-    return (
+       return (
         <div>
             <NavigationMenu u />
             <div className="user-form">
                 <h2>Criação de Usuário</h2>
                 <div className="form-group">
                     <label>Nome:</label>
-                    <input type="text" value={nome} onChange={handleNameChange} />
+                    <input className='input-new-user' type="text" value={nome} onChange={handleNameChange} />
                 </div>
                 <div className="form-group">
                     <label>Login:</label>
-                    <input type="text" value={login} onChange={handleLoginChange} />
+                    <input className='input-new-user' type="text" value={login} onChange={handleLoginChange} />
                 </div>
                 <div className="form-group">
                     <label>Senha:</label>
-                    <input type="password" value={senha} onChange={handlePasswordChange} />
+                    <input className='input-new-user' type="password" value={senha} onChange={handlePasswordChange} />
                 </div>
                 <div className="form-group">
                     <label>Role:</label>
-                    <select value={role} onChange={handleRoleChange}>
+                    <select className='select-new-user' value={role} onChange={handleRoleChange}>
                         <option value="ROLE_ATENDENTE">ATENDENTE</option>
                         <option value="ROLE_ADMIN">ADMINISTRADOR</option>
                     </select>
                 </div>
                 <button className='botao_cadastro' onClick={handleSubmit}>Criar Usuário</button>
             </div>
-            {showPopup && (
-                <div className="message-popup">
-                    <div className="message-box">
-                        <p>{message}</p>
-                    
-                        <button onClick={closePopup}>Fechar {`(${secondsLeft}s)`}</button>
-                    </div>
-                </div>
-            )}
         </div>
     );
 }

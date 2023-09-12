@@ -1,6 +1,6 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link, useParams, useNavigate } from 'react-router-dom'; 
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import NavigationMenu from './NavigationMenu';
 import '../css/objectDetailsPage.css';
 
@@ -10,7 +10,7 @@ const ObjectDetailsPage = (props) => {
   const history = useNavigate();
 
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedOption, setSelectedOption] = useState('codigo'); 
+  const [selectedOption, setSelectedOption] = useState('codigo');
 
   useEffect(() => {
     fetchObjectDetails();
@@ -36,16 +36,12 @@ const ObjectDetailsPage = (props) => {
       {objectDetails ? (
         <div className='containerDetalhes'>
           <div className="object-card-detail">
-            <div className='header_card'>
-             {/* <div className='codigoPeca'> <p >{objectDetails.codigoPeca}</p></div>
-             <div className='descricaoPeca'><p>{objectDetails.descricao}</p></div> */}
-            </div>
             <div className="description-detail">
               <div className='grid-tabela-container'>
                 <table className='grid-tabela'>
                   <tbody>
 
-                  <tr className='linha'>
+                    <tr className='linha'>
                       <td className='colunaPrimaria'>
                         <p className='codigoPeca'>{objectDetails.codigoPeca}</p>
                       </td>

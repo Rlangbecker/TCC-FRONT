@@ -51,16 +51,9 @@ function NavigationMenu() {
 
   return (
     <nav>
-      <input
-        type="checkbox"
-        id="menu-toggle"
-        className="menu-toggle"
-        checked={menuOpen}
-        onChange={handleMenuToggle}
-      />
-      <label htmlFor="menu-toggle" className="menu-icon">
-        <span className={`menu-icon-bar ${menuOpen ? 'open' : ''}`}></span>
-      </label>
+       <div className="containerSearch">
+        <SearchBar/>
+      </div>
       <ul className={menuOpen ? 'open' : ''}>
         <li>
           <Link to="/inicio">Início</Link>
@@ -76,14 +69,23 @@ function NavigationMenu() {
               <Link to="/editar-usuario">Editar Usuario</Link>
             </>
             )}
-            <a href="#">Seus dados</a>
+            <Link to="/meus-dados">Meus dados</Link>
             <a href="#" onClick={handleLogout}>Sair</a> {/* Chame handleLogout ao clicar em "Sair" */}
           </div>
         </li>
       </ul>
-      <div className="containerSearch">
-        <SearchBar/>
-      </div>
+      <input
+        type="checkbox"
+        id="menu-toggle"
+        className="menu-toggle"
+        checked={menuOpen}
+        onChange={handleMenuToggle}
+      />
+      <label htmlFor="menu-toggle" className="menu-icon">
+        <span className={`menu-icon-bar ${menuOpen ? 'open' : ''}`}></span>
+      </label>
+      
+     
     </nav>
   );
 }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ObjectCard from './components/ObjectCard';
 import './css/searchBar.css';
@@ -6,28 +6,17 @@ import './css/lista.css';
 import ObjectDetailsPage from './components/ObjectDetailsPage';
 import NavigationMenu from './components/NavigationMenu';
 
-class ListaDeProdutos extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: [],
-      currentPage: 0,
-      pageSize: 21,
-      selectedObject: null,
-      showDetailsPage: false,
-      selectedOption: 'codigo',
-      searchTerm: '',
-    };
-  }
+const ListaDeProdutos = () => {
+  const [data, setData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [pageSize] = useState(21);
+  const [selectedObject, setSelectedObject] = useState(null);
+  const [showDetailsPage, setShowDetailsPage] = useState(false);
+  const [selectedOption, setSelectedOption] = useState('codigo');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchedByCode, setSearchedByCode] = useState(false);
 
-  componentDidMount() {
-    console.log('ListaDeProdutos componentDidMount');
-    this.fetchPaginatedData();
-  }
-
-  fetchPaginatedData = async () => {
-    const { currentPage, pageSize } = this.state;
-  
+  const fetchPaginatedData = async () => {
     try {
       const response = await axios.get('http://localhost:8080/pecas', {
         params: {
@@ -38,107 +27,96 @@ class ListaDeProdutos extends Component {
         },
       });
       console.log('Dados buscados:', response.data);
-      this.setState({ data: response.data.elementos });
+      console.log('Pagina atual:', currentPage);
+      setData(response.data.elementos);
     } catch (error) {
       console.error('Erro ao buscar dados:', error);
     }
   };
-  
 
-  handlePageChange = (amount) => {
-    this.setState(
-      (prevState) => ({
-        currentPage: prevState.currentPage + amount,
-      }),
-      () => {
-        this.fetchPaginatedData();
-      }
-    );
-  };
-  handleChange = (event) => {
-    this.setState({ searchTerm: event.target.value });
-  };
-
-  handleSelectChange = (event) => {
-    this.setState({ selectedOption: event.target.value });
-  };
-
-  handleObjectClick = async (objeto) => {
+  const handleObjectClick = async (objeto) => {
     try {
       const response = await axios.get(`http://localhost:8080/pecas/codigo/${objeto.codigoPeca}`);
       const objectDetails = response.data;
-      this.setState({ selectedObject: objectDetails, showDetailsPage: true });
+      setSelectedObject(objectDetails);
+      setShowDetailsPage(true);
+      setSearchedByCode(true);
     } catch (error) {
       console.error(error);
     }
   };
 
-  handleBack = () => {
-    this.setState({
-      searchedByCode: false,
-      currentPage: 0,
-      searchTerm: '',
-      data: [],
-    }, () => {
-      this.fetchPaginatedData();
-    });
+  const handlePageChange = (amount) => {
+    setCurrentPage((prevPage) => prevPage + amount);
+    fetchPaginatedData();
   };
 
-  render() {
-    const { selectedOption, searchTerm, data, selectedObject, currentPage, showDetailsPage, searchedByCode } = this.state;
-    const pageSize = this.state.pageSize;
+  const handleBack = () => {
+    setSearchTerm('');
+    setCurrentPage(0);
+    setData([]);
+    setSearchedByCode(false);
+    fetchPaginatedData();
+  };
 
-    return (
-      <div>
-        <NavigationMenu u selectedOption={selectedOption} searchTerm={searchTerm} />
-        {showDetailsPage ? (
-          <div>
-            <ObjectDetailsPage
-              objectDetails={selectedObject}
-              onBack={() => this.setState({ showDetailsPage: false, selectedObject: null })}
-            />
-          </div>
-        ) : (
-          <div>
-            {!selectedObject && (
-              <div className="object-card-list">
-                {data && data.length > 0 ? (
-                  data.map((objeto) => (
-                    <div key={objeto.codigoPeca}>
-                      <ObjectCard
-                        objeto={objeto}
-                        onClick={() => this.handleObjectClick(objeto)}
-                      />
-                    </div>
-                  ))
-                ) : (
-                  <p>Nenhum objeto encontrado</p>
-                )}
-              </div>
-            )}
-            <div className="pagination-buttons">
-              <div className='pagination-buttons-container'>
-                {searchedByCode ? (
-                  <button className='buttonPageable' onClick={() => this.handleBack()}>
-                    Voltar
-                  </button>
-                ) : (
-                  <>
-                    <button className='buttonPageable' onClick={() => this.handlePageChange(-1)} disabled={currentPage === 0}>
-                      Anterior
-                    </button>
-                    <button className='buttonPageable' onClick={() => this.handlePageChange(1)} disabled={data.length < pageSize}>
-                      Próximo
-                    </button>
-                  </>
+  useEffect(() => {
+    console.log('ListaDeProdutos componentDidMount');
+    fetchPaginatedData();
+  }, []);
 
-                )}
-              </div>
+  return (
+    <div>
+      <NavigationMenu selectedOption={selectedOption} searchTerm={searchTerm} />
+      {showDetailsPage ? (
+        <div>
+          <ObjectDetailsPage
+            objectDetails={selectedObject}
+            onBack={() => {
+              setShowDetailsPage(false);
+              setSelectedObject(null);
+            }}
+          />
+        </div>
+      ) : (
+        <div>
+          {!selectedObject && (
+            <div className="object-card-list">
+              {data && data.length > 0 ? (
+                data.map((objeto) => (
+                  <div key={objeto.codigoPeca}>
+                    <ObjectCard objeto={objeto} onClick={() => handleObjectClick(objeto)} />
+                  </div>
+                ))
+              ) : (
+                <p>Nenhum objeto encontrado</p>
+              )}
+            </div>
+          )}
+          <div className="pagination-buttons">
+            <div className="pagination-buttons-container">
+              {searchedByCode ? (
+                <button className="buttonPageable" onClick={handleBack}>
+                  Voltar
+                </button>
+              ) : (
+                <>
+                  <button
+                    className="buttonPageable"
+                    onClick={() => handlePageChange(-1)}
+                    disabled={currentPage === 0}>Anterior</button>
+
+                  <button
+                    className="buttonPageable"
+                    onClick={() => handlePageChange(+1)}
+                    disabled={data.length < pageSize}>Próximo</button>
+                </>
+              )}
             </div>
           </div>
-        )}
-      </div>
-    );
-  }
+        </div>
+      )}
+    </div>
+  );
 }
+
 export default ListaDeProdutos;

@@ -1,3 +1,9 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .link{
 display: flex;
 align-content: baseline;
@@ -9,10 +15,9 @@ align-content: baseline;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap; 
-  padding: 10px; 
-  width: 100%;
-  position: relative;
+  flex-wrap: wrap;  
+  width: 50%;
+  position: fixed;
 }
 
 .select-wrapper {
@@ -30,7 +35,7 @@ align-content: baseline;
 .search-input {
   margin-top: 15px;
   padding: 8px;
-  flex: 2;
+
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-right: 10px;
