@@ -1,25 +1,19 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import '../css/searchBar.css';
 
-const SearchBar = ({ onSearch }) => {
+const SearchBar = () => {
   const [selectedOption, setSelectedOption] = useState('codigo');
   const [searchTerm, setSearchTerm] = useState('');
-
-  const handleSelectChange = (event) => {
-    setSelectedOption(event.target.value);
-  };
-
-  const handleChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
+  const navigate = useNavigate();
 
   const handleSearch = async () => {
     try {
       if (searchTerm === '') {
-        await axios.get('http://localhost:8080/pecas');
+        return
       } else if (selectedOption === 'codigo') {
-        onSearch(searchTerm, selectedOption); // Passa searchTerm e selectedOption para onSearch
+        navigate(`/detalhes/${searchTerm}`);
       } else if (selectedOption === 'referencia') {
         await axios.get(`http://localhost:8080/pecas/referencia/${searchTerm}`);
       } else if (selectedOption === 'nome') {
@@ -37,11 +31,11 @@ const SearchBar = ({ onSearch }) => {
         type="text"
         className="search-input"
         value={searchTerm}
-        onChange={handleChange}
+        onChange={(event) =>  setSearchTerm(event.target.value)}
         placeholder="Digite aqui"
       />
       <div className="select-wrapper">
-        <select value={selectedOption} onChange={handleSelectChange}>
+        <select value={selectedOption} onChange={(event) => setSelectedOption(event.target.value)}>
           <option value="codigo">Código</option>
           <option value="referencia">Referência</option>
           <option value="nome">Nome</option>

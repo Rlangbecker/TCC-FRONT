@@ -107,7 +107,7 @@ class ListaDeProdutos extends Component {
                     <div key={objeto.codigoPeca}>
                       <ObjectCard
                         objeto={objeto}
-                        onObjectClick={() => this.handleObjectClick(objeto)}
+                        onClick={() => this.handleObjectClick(objeto)}
                       />
                     </div>
                   ))

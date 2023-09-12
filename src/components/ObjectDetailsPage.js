@@ -37,13 +37,24 @@ const ObjectDetailsPage = (props) => {
         <div className='containerDetalhes'>
           <div className="object-card-detail">
             <div className='header_card'>
-             <div className='codigoPeca'> <p >{objectDetails.codigoPeca}</p></div>
-             <div className='descricaoPeca'><p>{objectDetails.descricao}</p></div>
+             {/* <div className='codigoPeca'> <p >{objectDetails.codigoPeca}</p></div>
+             <div className='descricaoPeca'><p>{objectDetails.descricao}</p></div> */}
             </div>
             <div className="description-detail">
               <div className='grid-tabela-container'>
                 <table className='grid-tabela'>
                   <tbody>
+
+                  <tr className='linha'>
+                      <td className='colunaPrimaria'>
+                        <p className='codigoPeca'>{objectDetails.codigoPeca}</p>
+                      </td>
+                      <td className='coluna'>
+                        <p className='descricaoPeca'>{objectDetails.descricao}</p>
+                      </td>
+                    </tr>
+
+
                     <tr className='linha'>
                       <td className='colunaPrimaria'>
                         <h4>Referência:</h4>

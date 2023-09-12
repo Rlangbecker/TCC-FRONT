@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import NavigationMenu from './components/NavigationMenu';
+import { toast } from "react-toastify";
 import './css/novoUsuario.css';
 
 function NovoUsuario() {
@@ -46,12 +47,29 @@ function NovoUsuario() {
             });
 
             if (response.status === 201) {
-                // Registro bem-sucedido
-                showMessage('Usuário registrado com sucesso!');
+                toast.success('Usuário criado com sucesso!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    });
             } else {
-                // Erro no registro
                 const errorData = await response.json();
-                showMessage(`Erro no registro: ${errorData.message}`);
+
+                toast.error(`Erro no registro: ${errorData.message}`, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    });
             }
         } catch (error) {
             console.error('Erro ao registrar usuário:', error);

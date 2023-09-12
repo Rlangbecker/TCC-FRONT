@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import jwtDecode from 'jwt-decode';
+
 import '../css/login.css';
+import { useAuth } from '../AuthContext';
+
 
 function Login() {
     const [login, setLogin] = useState('');
@@ -11,44 +14,15 @@ function Login() {
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const storedToken = localStorage.getItem('token');
-        if (storedToken) {
-            setToken(storedToken);
-            navigate('/inicio');
-        }
-    }, [navigate]);
-
-    const handleLogin = async () => {
-        const response = await fetch('http://localhost:8080/auth/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ login, senha }),
-        });
-
-        if (response.status === 200) {
-            const token = await response.text();
-            setToken(token);
-            localStorage.setItem('token', token)
-            const decodedToken = jwtDecode(token);
-    
-            if (decodedToken && decodedToken.role) { // Verifique se role está presente no token
-                setRole(decodedToken.role);
-            }
-        
-            alert('Login bem-sucedido!');
-            navigate('/inicio');
-        } else {
-            const errorData = await response.json();
-            setErrorMessage(errorData.message || 'Login falhou. Verifique suas credenciais.');
-        }
-    };
+    const {handleLogin} = useAuth()
 
     const handleInputChange = () => {
         setErrorMessage('');
     };
+
+    if (localStorage.getItem('token')) {
+        navigate('/inicio');
+    }
 
     return (
         <div className="login-container">
@@ -75,7 +49,7 @@ function Login() {
                         handleInputChange();
                     }}
                 />
-                <button onClick={handleLogin}>Entrar</button>
+                <button onClick={ () => handleLogin(login,senha)}>Entrar</button>
             </div>
         </div>
     );

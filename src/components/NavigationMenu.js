@@ -1,18 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from './searchBar';
 import { useNavigate } from 'react-router-dom';
 import '../css/navigationMenu.css';
 import imgConfig from '../img/roda-dentada.png';
 import LogoutService from '../function_logout';
+import { useAuth } from '../AuthContext';
 
 function NavigationMenu() {
+  const { roles } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false); // Adicione o estado para o dropdown
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const history = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedOption, setSelectedOption] = useState('codigo');
 
+  const [rolesByOptions, setRolesByOptions] = useState('');
+
+
+  useEffect(() => {
+    setRolesByOptions(localStorage.getItem('role'));
+  }, []);
+  console.log(rolesByOptions);
   const handleMenuToggle = () => {
     setMenuOpen(!menuOpen);
   };
@@ -22,7 +31,7 @@ function NavigationMenu() {
     setSelectedOption(option);
 
     if (searchTerm === '') {
-      history(`/inicio`);
+      return
     } else if (selectedOption === 'codigo') {
       history(`/detalhes/${term}`);
     } else if (selectedOption === 'referencia') {
@@ -37,7 +46,7 @@ function NavigationMenu() {
   };
 
   const handleLogout = () => {
-    LogoutService.logout(); // Chame a função de logout da classe LogoutService
+    LogoutService.logout();
   };
 
   return (
@@ -57,20 +66,23 @@ function NavigationMenu() {
           <Link to="/inicio">Início</Link>
         </li>
         <li>
-      
+
         </li>
         <li className="dropdown" onClick={toggleDropdown}>
           <img className="img_config" src={imgConfig} alt="Configurações" />
           <div className={`dropdown-content ${dropdownOpen ? 'show' : ''}`}>
-            <Link to="/novo-usuario">Criar Usuario</Link>
-            <a href="#">Editar Usuario</a>
+            {rolesByOptions === 'ROLE_ADMIN' && (<>
+              <Link to="/novo-usuario">Criar Usuario</Link>
+              <Link to="/editar-usuario">Editar Usuario</Link>
+            </>
+            )}
             <a href="#">Seus dados</a>
             <a href="#" onClick={handleLogout}>Sair</a> {/* Chame handleLogout ao clicar em "Sair" */}
           </div>
         </li>
       </ul>
       <div className="containerSearch">
-        <SearchBar onSearch={handleSearch} />
+        <SearchBar/>
       </div>
     </nav>
   );
