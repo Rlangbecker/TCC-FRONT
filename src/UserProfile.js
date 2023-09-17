@@ -153,7 +153,7 @@ const UserProfile = () => {
                                     className="save-password-button"
                                     onClick={handleChangePassword}
                                 >
-                                    Salvar Nova Senha
+                                    Salvar
                                 </button>
                                 <button
                                     className="cancel-password-button"

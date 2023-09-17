@@ -10,6 +10,7 @@ import { AuthProvider } from '../AuthContext';
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import UserProfile from '../UserProfile';
+import UserList from '../components/UserList';
 
 
 function AppRouter() {
@@ -32,6 +33,10 @@ function AppRouter() {
               <Route
                 path="/meus-dados"
                 element={<UserProfile />} />
+
+              <Route
+                path="/editar-usuario"
+                element={<UserList />} />
 
               <Route element={<InternalRoutes.NewUserRoute />}>
                 <Route

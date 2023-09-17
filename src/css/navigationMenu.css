@@ -19,10 +19,12 @@ nav {
 ul {
     list-style: none;
     display: flex;
-    justify-content: center; /* Centraliza os elementos horizontalmente */
-    align-items: center; /* Centraliza os elementos verticalmente */
-    margin: 0;
+    justify-content: center; 
+    align-items: center; 
+    width: 100%;
+    margin: 0 auto;
     padding: 0;
+    gap: 300px;
 }
 
 li {
@@ -38,7 +40,7 @@ li a {
 }
 
 ul li:last-child {
-    margin-left: auto; /* Move o último elemento para o canto superior direito */
+    margin-left: auto; 
 }
 
 li a:hover {
@@ -48,7 +50,8 @@ li a:hover {
 .img_config{
     width: 30px;
     height: 30px;
-    margin-right: 10px;
+    margin-right: 20px;
+    position: relative;
 }
 
 .dropdown {
@@ -63,14 +66,13 @@ li a:hover {
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-    left: -130px; /* Ajuste o valor negativo para a largura do dropdown */
+    left: -130px;
   }
   
   .dropdown-content.show {
     display: block;
   }
   
-  /* Estilos para os links dentro do dropdown */
   .dropdown-content a {
     color: black;
     padding: 12px 16px;
@@ -78,7 +80,6 @@ li a:hover {
     display: block;
   }
   
-  /* Estilize o link quando o mouse passar por cima */
   .dropdown-content a:hover {
     background: none;
     text-decoration: underline;
@@ -92,23 +93,17 @@ li a:hover {
     width: 100%;
 }
 
-/* Estilos para dispositivos móveis */
 @media screen and (max-width: 600px) {
     ul {
         flex-direction: column;
         align-items: center;
         display: none;
-        /* Esconde o menu por padrão */
         position: absolute;
-        /* Posiciona o menu de forma absoluta */
         top: 30px;
-        /* Ajusta a posição vertical */
         left: 0;
         width: 100%;
         background-color: #d40303e3;
-        /* Define a cor de fundo */
         z-index: 1;
-        /* Define a ordem de empilhamento */
     }
 
     ul.open {
@@ -134,11 +129,8 @@ li a:hover {
 
     .containerSearch {
         margin-top: 70px;
-        /* Ajuste a margem superior para dar espaço ao menu */
     }
 
-    /* Estilos para o ícone do menu */
-    /* Estilos para o ícone do menu */
     .menu-icon {
         width: 30px;
         height: 3px;
@@ -173,7 +165,6 @@ li a:hover {
 
     .menu-icon.open {
         background-color: #555;
-        /* Altera a cor do ícone quando o menu está aberto */
     }
 
 }

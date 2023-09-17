@@ -7,44 +7,58 @@ export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const [roles, setRole] = useState([]);
-  const [ nome, setNome] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async (login, senha) => {
-
     try {
-      const { data } = await axios.post('http://localhost:8080/auth/login', { login, senha });
-
-      console.log(data);
-      localStorage.setItem('token', data)
-      const decodedToken = jwtDecode(data);
-
-      if (decodedToken && decodedToken.CARGOS) {
-        console.log(decodedToken.CARGOS);
-        setRole(decodedToken.CARGOS);
-        localStorage.setItem('role', decodedToken.CARGOS)
-        localStorage.setItem('sub',decodedToken.sub)
-        localStorage.setItem('nome',decodedToken.Nome)
+      const response = await axios.post('http://localhost:8080/auth/login', { login, senha });
   
-        navigate('/inicio');
+      const statusCode = response.status;
+      const responseData = response.data;
+  
+      console.log(`Status Code: ${statusCode}`);
+  
+      if (statusCode === 200) {
 
-        toast.success('Bem vindo ' + localStorage.getItem('nome') ,{
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
+        localStorage.setItem('token', responseData);
+        const decodedToken = jwtDecode(responseData);
+  
+        if (decodedToken && decodedToken.CARGOS) {
+          console.log(decodedToken.CARGOS);
+          setRole(decodedToken.CARGOS);
+          localStorage.setItem('role', decodedToken.CARGOS)
+          localStorage.setItem('sub', decodedToken.sub)
+          localStorage.setItem('nome', decodedToken.Nome)
+  
+          navigate('/inicio');
+  
+          toast.success('Bem vindo ' + localStorage.getItem('nome'), {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
           });
-      }
-      //manipular statuscode
+        }
+      } 
     } catch (error) {
-      console.log(error.message);
+      toast.error('Verifique suas credenciais!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+      console.error(`Erro na requisição: ${error.message}`);
     }
   };
-
+  
 
   return (
     <AuthContext.Provider value={{ roles, handleLogin }}>

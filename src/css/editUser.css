@@ -1,32 +1,5 @@
-/* CSS para a classe .container em EditUser.css */
-.container {
-    display: flex;
-}
-
-/* Estilos para a Sidebar */
-.sidebar {
-    width: 250px; /* Largura da barra lateral */
-    position: fixed;
-    left: 0;
-    background-color: #333; /* Cor de fundo */
-    color: white; /* Cor do texto */
-    padding: 20px;
-}
-
-/* Estilos para o conteúdo à direita da Sidebar */
-.content {
-    flex: 1; /* Ocupa todo o espaço restante */
-    margin-left: 250px; /* Ajuste a margem para acomodar a largura da Sidebar */
-    padding: 20px;
+*{
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-}
-
-.content-container {
-    border: 1px solid #161616;
-    padding: 20px;
-    margin: 0 auto; /* Centraliza horizontalmente */
-    max-width: 600px; /* Define uma largura máxima para evitar que o conteúdo fique muito largo */
-    display: flex;
-    justify-content: center; /* Centralize horizontalmente */
-    align-items: center; /* Centralize verticalmente */
 }

@@ -26,7 +26,7 @@ function Login() {
 
     return (
         <div className="login-container">
-            <img src="https://i.ibb.co/D5j2Jz8/logo-loja.png" alt="logo-loja" border="0" />
+            <img src="https://carlosautopecas-api.s3.sa-east-1.amazonaws.com/logo_loja.png" alt="logo-loja" border="0" />
 
             <div className="login-box">
                 <h1>Login</h1>

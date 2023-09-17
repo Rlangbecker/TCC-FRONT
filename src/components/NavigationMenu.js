@@ -51,9 +51,6 @@ function NavigationMenu() {
 
   return (
     <nav>
-       <div className="containerSearch">
-        <SearchBar/>
-      </div>
       <ul className={menuOpen ? 'open' : ''}>
         <li>
           <Link to="/inicio">Início</Link>
@@ -61,8 +58,13 @@ function NavigationMenu() {
         <li>
 
         </li>
+        <li>
+          <div className="containerSearch">
+          <SearchBar />
+        </div></li>
         <li className="dropdown" onClick={toggleDropdown}>
-          <img className="img_config" src={imgConfig} alt="Configurações" />
+
+          <img className="img_config" src="https://carlosautopecas-api.s3.sa-east-1.amazonaws.com/roda-dentada.png" alt="Configurações" />
           <div className={`dropdown-content ${dropdownOpen ? 'show' : ''}`}>
             {rolesByOptions === 'ROLE_ADMIN' && (<>
               <Link to="/novo-usuario">Criar Usuario</Link>
@@ -70,7 +72,7 @@ function NavigationMenu() {
             </>
             )}
             <Link to="/meus-dados">Meus dados</Link>
-            <a href="#" onClick={handleLogout}>Sair</a> {/* Chame handleLogout ao clicar em "Sair" */}
+            <Link to="/" onClick={handleLogout}> Sair</Link>
           </div>
         </li>
       </ul>
@@ -84,8 +86,8 @@ function NavigationMenu() {
       <label htmlFor="menu-toggle" className="menu-icon">
         <span className={`menu-icon-bar ${menuOpen ? 'open' : ''}`}></span>
       </label>
-      
-     
+
+
     </nav>
   );
 }

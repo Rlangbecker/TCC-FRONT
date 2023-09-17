@@ -23,7 +23,7 @@
     width: 60%;
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 15px;
   }
   
 
@@ -47,11 +47,7 @@
     display: block;
   }
 
-  .message{
-    margin: 0 auto;
-    padding: 10px;
-    text-decoration: underline;
-  }
+
   
   button:hover {
     background-color: #f51313;
