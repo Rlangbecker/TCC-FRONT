@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import SearchBar from './searchBar';
 import { useNavigate } from 'react-router-dom';
 import '../css/navigationMenu.css';
-import imgConfig from '../img/roda-dentada.png';
 import LogoutService from '../function_logout';
 import { useAuth } from '../AuthContext';
 
@@ -52,17 +51,14 @@ function NavigationMenu() {
   return (
     <nav>
       <ul className={menuOpen ? 'open' : ''}>
-        <li>
+        <li className='nav-line' id='first-li'>
           <Link to="/inicio">Início</Link>
         </li>
-        <li>
-
-        </li>
-        <li>
+        <li  className='nav-line' id='second-li'>
           <div className="containerSearch">
           <SearchBar />
         </div></li>
-        <li className="dropdown" onClick={toggleDropdown}>
+        <li className="dropdown" onClick={toggleDropdown} id='third-li'>
 
           <img className="img_config" src="https://carlosautopecas-api.s3.sa-east-1.amazonaws.com/roda-dentada.png" alt="Configurações" />
           <div className={`dropdown-content ${dropdownOpen ? 'show' : ''}`}>

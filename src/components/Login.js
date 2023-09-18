@@ -9,6 +9,8 @@ import { useAuth } from '../AuthContext';
 function Login() {
     const [login, setLogin] = useState('');
     const [senha, setSenha] = useState('');
+    const [senhaVisivel, setSenhaVisivel] = useState(false);
+    const [placeholderPassword, setPlaceholderPassword] = useState('Insira sua senha aqui');
     const [token, setToken] = useState('');
     const [role, setRole] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -20,12 +22,21 @@ function Login() {
         setErrorMessage('');
     };
 
+    const mostrarSenha = () => {
+        setSenhaVisivel(!senhaVisivel);
+    };
+
+    const handleInputPasswordClick = () => {
+        setPlaceholderPassword("");
+      };
+
     if (localStorage.getItem('token')) {
         navigate('/inicio');
     }
 
     return (
         <div className="login-container">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"></link>
             <img src="https://carlosautopecas-api.s3.sa-east-1.amazonaws.com/logo_loja.png" alt="logo-loja" border="0" />
 
             <div className="login-box">
@@ -40,15 +51,26 @@ function Login() {
                         handleInputChange();
                     }}
                 />
-                <input
-                    type="password"
-                    placeholder="Senha"
-                    value={senha}
-                    onChange={(e) => {
-                        setSenha(e.target.value);
-                        handleInputChange();
-                    }}
-                />
+                 {senhaVisivel ? (
+                                <input
+                                    className="password-blinded"
+                                    type="text"
+                                    placeholder={placeholderPassword}
+                                    value={senha}
+                                    onClick={handleInputPasswordClick}
+                                    onChange={(e) => setSenha(e.target.value)}
+                                />
+                            ) : (
+                                <input
+                                    className="password-seen"
+                                    type="password"
+                                    placeholder={placeholderPassword}
+                                    value={senha}
+                                    onClick={handleInputPasswordClick}
+                                    onChange={(e) => setSenha(e.target.value)}
+                                />
+                            )}
+                            <i className={`bi ${senhaVisivel ? 'bi-eye-slash' : 'bi-eye'}`} id="btn-senha" onClick={mostrarSenha}></i>
                 <button onClick={ () => handleLogin(login,senha)}>Entrar</button>
             </div>
         </div>
