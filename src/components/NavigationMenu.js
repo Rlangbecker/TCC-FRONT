@@ -25,20 +25,20 @@ function NavigationMenu() {
     setMenuOpen(!menuOpen);
   };
 
-  const handleSearch = async (term, option) => {
-    setSearchTerm(term);
-    setSelectedOption(option);
+  // const handleSearch = async (term, option) => {
+  //   setSearchTerm(term);
+  //   setSelectedOption(option);
 
-    if (searchTerm === '') {
-      return
-    } else if (selectedOption === 'codigo') {
-      history(`/detalhes/${term}`);
-    } else if (selectedOption === 'referencia') {
-      history(`/referencia/${term}`);
-    } else if (selectedOption === 'nome') {
-      history(`/descricao/${searchTerm}`);
-    }
-  };
+  //   if (searchTerm === '') {
+  //     return
+  //   } else if (selectedOption === 'codigo') {
+  //     history(`/detalhes/${term}`);
+  //   } else if (selectedOption === 'referencia') {
+  //     history(`/referencia/${term}`);
+  //   } else if (selectedOption === 'nome') {
+  //     history(`/descricao/${searchTerm}`);
+  //   }
+  // };
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
