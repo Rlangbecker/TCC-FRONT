@@ -2,23 +2,31 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../css/searchBar.css';
+import ListaByNome from './listaByNome';
 
-const SearchBar = () => {
-  const [selectedOption, setSelectedOption] = useState('codigo');
-  const [searchTerm, setSearchTerm] = useState('');
+const SearchBar = ({ searchTerm,
+  selectedOption,
+  setSearchTerm,
+  setSelectedOption, onDataReceived }) => {
+
   const navigate = useNavigate();
 
   const handleSearch = async () => {
     try {
       if (searchTerm === '') {
-        return
+        return;
       } else if (selectedOption === 'codigo') {
         navigate(`/detalhes/${searchTerm}`);
       } else if (selectedOption === 'referencia') {
-        await axios.get(`http://localhost:8080/pecas/referencia/${searchTerm}`);
+        navigate(`/buscar-referencia/${searchTerm}`);
+    
+  
       } else if (selectedOption === 'nome') {
-        await axios.get(`http://localhost:8080/pecas/descricao/${searchTerm}`);
+       
+        navigate(`/buscar-nome/${searchTerm}`);
+       
       }
+      onDataReceived([]);
     } catch (error) {
       console.error(error);
     }
@@ -30,7 +38,7 @@ const SearchBar = () => {
         type="text"
         className="search-input"
         value={searchTerm}
-        onChange={(event) =>  setSearchTerm(event.target.value)}
+        onChange={(event) => setSearchTerm(event.target.value)}
         placeholder="Digite aqui"
       />
       <div className="select-wrapper">

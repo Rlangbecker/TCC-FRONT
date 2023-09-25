@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ObjectCard from './components/ObjectCard';
-import './css/searchBar.css';
 import './css/lista.css';
 import ObjectDetailsPage from './components/ObjectDetailsPage';
 import NavigationMenu from './components/NavigationMenu';
@@ -34,6 +33,11 @@ const ListaDeProdutos = () => {
     }
   };
 
+  useEffect(() => {
+    console.log('ListaDeProdutos componentDidMount');
+    fetchPaginatedData();
+  }, [currentPage]);
+
   const handleObjectClick = async (objeto) => {
     try {
       const response = await axios.get(`http://localhost:8080/pecas/codigo/${objeto.codigoPeca}`);
@@ -51,6 +55,7 @@ const ListaDeProdutos = () => {
     fetchPaginatedData();
   };
 
+
   const handleBack = () => {
     setSearchTerm('');
     setCurrentPage(0);
@@ -59,14 +64,16 @@ const ListaDeProdutos = () => {
     fetchPaginatedData();
   };
 
-  useEffect(() => {
-    console.log('ListaDeProdutos componentDidMount');
-    fetchPaginatedData();
-  }, []);
+
 
   return (
-    <div>
-      <NavigationMenu selectedOption={selectedOption} searchTerm={searchTerm} />
+    <div className='container-list'>
+      <NavigationMenu
+        selectedOption={selectedOption}
+        searchTerm={searchTerm}
+        setSelectedOption={setSelectedOption}
+        setSearchTerm={setSearchTerm}
+      />
       {showDetailsPage ? (
         <div>
           <ObjectDetailsPage

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import NavigationMenu from './components/NavigationMenu';
 import axios from 'axios';
 import { toast } from "react-toastify";
-
 import './css/userProfile.css';
 
 const UserProfile = () => {
@@ -14,6 +13,8 @@ const UserProfile = () => {
     const [senha, setSenha] = useState('');
     const [novaSenha, setNovaSenha] = useState('');
     const [showChangePasswordButton, setShowChangePasswordButton] = useState(true);
+    const [placeholderOldPassword, setPlaceholderOldPassword] = useState('Senha atual');
+    const [placeholderNewPassword, setPlaceholderNewPassword] = useState('Nova senha');
 
     useEffect(() => {
         setLogin(localStorage.getItem('sub'));
@@ -96,10 +97,17 @@ const UserProfile = () => {
         setShowChangePasswordButton(true);
     };
 
+    const handleInputOldPasswordClick = () => {
+        setPlaceholderOldPassword("");
+    };
+
+    const handleInputNewPasswordClick = () => {
+        setPlaceholderNewPassword("");
+    };
     return (
         <div>
             <NavigationMenu u />
-            <div className="user-form">
+            <div className="user-form-profile">
                 <h2>Meus Dados</h2>
                 <div className="form-group">
                     <p>
@@ -132,7 +140,8 @@ const UserProfile = () => {
                             <input
                                 className="inputProfile"
                                 type="password"
-                                placeholder="Senha Atual"
+                                placeholder={placeholderOldPassword}
+                                onClick={handleInputOldPasswordClick}
                                 value={senha}
                                 onChange={(e) => setSenha(e.target.value)}
                             />
@@ -142,7 +151,8 @@ const UserProfile = () => {
                             <input
                                 className="inputProfile"
                                 type="password"
-                                placeholder="Nova Senha"
+                                placeholder={placeholderNewPassword}
+                                onClick={handleInputNewPasswordClick}
                                 value={novaSenha}
                                 onChange={(e) => setNovaSenha(e.target.value)}
                             />

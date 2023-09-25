@@ -94,7 +94,7 @@ function UserDetails({ user, senha, setSenha, novaSenha, setNovaSenha, onClose }
 
     return (
 
-        <div className="user-form">
+        <div className="user-form-edit">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"></link>
             <div className="button-close-container">
                 <button className="button-close-window" onClick={onClose}>

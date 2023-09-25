@@ -5,14 +5,18 @@ import { useNavigate } from 'react-router-dom';
 import '../css/navigationMenu.css';
 import LogoutService from '../function_logout';
 import { useAuth } from '../AuthContext';
+import ListaDeProdutos from '../lista';
 
-function NavigationMenu() {
+function NavigationMenu({
+  searchTerm,
+  selectedOption,
+  setSearchTerm,
+  setSelectedOption,
+}) {
   const { roles } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const history = useNavigate();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedOption, setSelectedOption] = useState('codigo');
+  const navigate = useNavigate();
 
   const [rolesByOptions, setRolesByOptions] = useState('');
 
@@ -25,21 +29,6 @@ function NavigationMenu() {
     setMenuOpen(!menuOpen);
   };
 
-  // const handleSearch = async (term, option) => {
-  //   setSearchTerm(term);
-  //   setSelectedOption(option);
-
-  //   if (searchTerm === '') {
-  //     return
-  //   } else if (selectedOption === 'codigo') {
-  //     history(`/detalhes/${term}`);
-  //   } else if (selectedOption === 'referencia') {
-  //     history(`/referencia/${term}`);
-  //   } else if (selectedOption === 'nome') {
-  //     history(`/descricao/${searchTerm}`);
-  //   }
-  // };
-
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
@@ -48,16 +37,22 @@ function NavigationMenu() {
     LogoutService.logout();
   };
 
+
+
   return (
     <nav>
       <ul className={menuOpen ? 'open' : ''}>
         <li className='nav-line' id='first-li'>
           <Link to="/inicio">Início</Link>
         </li>
-        <li  className='nav-line' id='second-li'>
+        <li className='nav-line' id='second-li'>
           <div className="containerSearch">
-          <SearchBar />
-        </div></li>
+            <SearchBar
+              searchTerm={searchTerm}
+              selectedOption={selectedOption}
+              setSearchTerm={setSearchTerm}
+              setSelectedOption={setSelectedOption} />
+          </div></li>
         <li className="dropdown" onClick={toggleDropdown} id='third-li'>
 
           <img className="img_config" src="https://carlosautopecas-api.s3.sa-east-1.amazonaws.com/roda-dentada.png" alt="Configurações" />

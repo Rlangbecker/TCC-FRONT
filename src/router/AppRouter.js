@@ -11,9 +11,16 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import UserProfile from '../UserProfile';
 import UserList from '../components/UserList';
+import ListaByNome from '../components/listaByNome';
+import NavigationMenu from '../components/NavigationMenu';
+import ListaByReferencia from '../components/listaByReferencia';
 
 
 function AppRouter() {
+  const [searchData, setSearchData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedOption, setSelectedOption] = useState('codigo');
+
   return (
     <>
       <BrowserRouter>
@@ -24,7 +31,18 @@ function AppRouter() {
             <Route element={<InternalRoutes.PrivateRoute />}>
               <Route
                 path="/inicio"
-                element={<ListaDeProdutos />} />
+                element={(
+                  <NavigationMenu
+                    searchTerm={searchTerm}
+                    selectedOption={selectedOption}
+                    setSearchTerm={setSearchTerm}
+                    setSelectedOption={setSelectedOption}
+                  />,
+                  <ListaDeProdutos />
+                )
+                }
+              />
+
 
               <Route
                 path="/detalhes/:codigoPeca"
@@ -33,6 +51,16 @@ function AppRouter() {
               <Route
                 path="/meus-dados"
                 element={<UserProfile />} />
+
+              <Route
+                path="/buscar-nome/:descricao"
+                element={<ListaByNome onDataReceived={(data) => setSearchData(data)} />}
+              />
+
+              <Route
+                path="/buscar-referencia/:referencia"
+                element={<ListaByReferencia onDataReceived={(data) => setSearchData(data)} />}
+              />
 
               <Route
                 path="/editar-usuario"

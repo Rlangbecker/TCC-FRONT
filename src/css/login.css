@@ -1,93 +1,82 @@
-img {
-  margin-bottom: 10px;
-  top: 0;
-}
+/* login.css */
 
+/* Estilize o container principal */
 .login-container {
   display: flex;
+  padding: 20px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: rgba(255, 255, 255, 0.884);
+  background-color: #f0f0f0;
 }
 
+.login-container img {
+  width: 500px;
+  height: auto;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+
 .login-box {
-  background-color: #a3a3a354;
+  background-color: #ffffff;
   padding: 20px;
-  border-radius: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  max-height: 35vh;
+  height: 30vh;
+  min-height: 25vh;
+  min-width: 10vw;
+  width: 20vw;
+  max-width: 25vw;
+  width: 25vw;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
-  max-width: 400px;
-  width: 90%;
-  height: 25vh;
-  margin: 0 auto;
-  position: relative;
 }
 
 .login-box h1 {
+  font-size: 24px;
   margin-bottom: 20px;
-  color: #333;
 }
 
-input {
+
+.login-user,
+.password-blinded,
+.password-seen {
+  min-width: 12vw;
+  max-width: 12vw;
+  width: 12vw;
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 80%;
-  font-size: 16px;
+  border-radius: 4px;
+  position: relative;
 }
 
-input[type="password"] {
-  position: relative; 
-}
 
-.bi-eye {
-  font-size: 50px;
+.bi-eye,
+.bi-eye-slash {
   position: absolute;
-  margin-top: -5px;
-  top: 50%; 
+  top: 50%;
   right: 10px;
   transform: translateY(-50%);
   cursor: pointer;
 }
 
-button {
-  padding: 12px 24px;
+.password-container {
   position: relative;
-  background-color: #d40303;
-  color: white;
+}
+
+button {
+  background-color: #d00f0f;
+  color: #fff;
+  padding: 10px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
-  transition: background-color 0.3s;
-}
+  min-width: 5vw;
+  max-width: 10vw;
 
-button:hover {
-  background-color: #e2655c;
-}
-
-.error-message {
-  color: #d9534f;
-  font-size: 14px;
-  margin-top: -10px;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-@media (max-width: 768px) {
-  .login-box {
-    padding: 15px;
-  }
-
-  input,
-  button {
-    font-size: 14px;
-  }
-
-  img {
-    max-width: 80%;
-  }
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import NavigationMenu from './components/NavigationMenu';
 import { toast } from "react-toastify";
 import './css/novoUsuario.css';
@@ -8,9 +9,6 @@ const NovoUsuario = () => {
     const [login, setLogin] = useState('');
     const [senha, setPassword] = useState('');
     const [role, setRole] = useState('ROLE_ATENDENTE');
-    const [message, setMessage] = useState('');
-    const [showPopup, setShowPopup] = useState(false);
-    const [secondsLeft, setSecondsLeft] = useState(5);
 
     const handleNameChange = (e) => {
         setName(e.target.value);
@@ -38,13 +36,11 @@ const NovoUsuario = () => {
         };
 
         try {
-            const response = await fetch('http://localhost:8080/auth/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(userData),
-            });
+            const response = await axios.post('http://localhost:8080/auth/register', userData, {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
 
             if (response.status === 201) {
                 toast.success('Usuário criado com sucesso!', {
@@ -79,7 +75,7 @@ const NovoUsuario = () => {
        return (
         <div>
             <NavigationMenu u />
-            <div className="user-form">
+            <div className="user-form-newuser">
                 <h2>Criação de Usuário</h2>
                 <div className="form-group">
                     <label>Nome:</label>

@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import '../css/login.css';
 import { useAuth } from '../AuthContext';
 
-
 function Login() {
     const [login, setLogin] = useState('');
     const [senha, setSenha] = useState('');
@@ -16,7 +15,7 @@ function Login() {
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
-    const {handleLogin} = useAuth()
+    const { handleLogin } = useAuth();
 
     const handleInputChange = () => {
         setErrorMessage('');
@@ -28,7 +27,7 @@ function Login() {
 
     const handleInputPasswordClick = () => {
         setPlaceholderPassword("");
-      };
+    };
 
     if (localStorage.getItem('token')) {
         navigate('/inicio');
@@ -43,6 +42,7 @@ function Login() {
                 <h1>Login</h1>
                 {errorMessage && <p className="error-message">{errorMessage}</p>}
                 <input
+                className="login-user"
                     type="text"
                     placeholder="Usuário"
                     value={login}
@@ -51,27 +51,30 @@ function Login() {
                         handleInputChange();
                     }}
                 />
-                 {senhaVisivel ? (
-                                <input
-                                    className="password-blinded"
-                                    type="text"
-                                    placeholder={placeholderPassword}
-                                    value={senha}
-                                    onClick={handleInputPasswordClick}
-                                    onChange={(e) => setSenha(e.target.value)}
-                                />
-                            ) : (
-                                <input
-                                    className="password-seen"
-                                    type="password"
-                                    placeholder={placeholderPassword}
-                                    value={senha}
-                                    onClick={handleInputPasswordClick}
-                                    onChange={(e) => setSenha(e.target.value)}
-                                />
-                            )}
-                            <i className={`bi ${senhaVisivel ? 'bi-eye-slash' : 'bi-eye'}`} id="btn-senha" onClick={mostrarSenha}></i>
-                <button onClick={ () => handleLogin(login,senha)}>Entrar</button>
+                <div className="password-container">
+                    {senhaVisivel ? (
+                        <input
+                            className="password-blinded"
+                            type="text"
+                            placeholder={placeholderPassword}
+                            value={senha}
+                            onClick={handleInputPasswordClick}
+                            onChange={(e) => setSenha(e.target.value)}
+                        />
+                    ) : (
+                        <input
+                            className="password-seen"
+                            type="password"
+                            placeholder={placeholderPassword}
+                            value={senha}
+                            onClick={handleInputPasswordClick}
+                            onChange={(e) => setSenha(e.target.value)}
+                        />
+                    )}
+                    <i className={`bi ${senhaVisivel ? 'bi-eye-slash' : 'bi-eye'}`} onClick={mostrarSenha}></i>
+                </div>
+
+                <button onClick={() => handleLogin(login, senha)}>Entrar</button>
             </div>
         </div>
     );
