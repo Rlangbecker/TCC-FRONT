@@ -4,6 +4,7 @@ import ObjectCard from './components/ObjectCard';
 import './css/lista.css';
 import ObjectDetailsPage from './components/ObjectDetailsPage';
 import NavigationMenu from './components/NavigationMenu';
+import { useNavigate } from 'react-router-dom'
 
 const ListaDeProdutos = () => {
   const [data, setData] = useState([]);
@@ -14,6 +15,7 @@ const ListaDeProdutos = () => {
   const [selectedOption, setSelectedOption] = useState('codigo');
   const [searchTerm, setSearchTerm] = useState('');
   const [searchedByCode, setSearchedByCode] = useState(false);
+  const navigate = useNavigate();
 
   const fetchPaginatedData = async () => {
     try {
@@ -45,6 +47,9 @@ const ListaDeProdutos = () => {
       setSelectedObject(objectDetails);
       setShowDetailsPage(true);
       setSearchedByCode(true);
+      if(response.status === 400){
+        navigate('/inicio')
+      }
     } catch (error) {
       console.error(error);
     }
@@ -61,6 +66,7 @@ const ListaDeProdutos = () => {
     setCurrentPage(0);
     setData([]);
     setSearchedByCode(false);
+    navigate('/inicio')
     fetchPaginatedData();
   };
 

@@ -7,11 +7,12 @@ import '../css/objectDetailsPage.css';
 const ObjectDetailsPage = (props) => {
   const { codigoPeca } = useParams();
   const [objectDetails, setObjectDetails] = useState(null);
-  const history = useNavigate();
+  const navigate = useNavigate();
   const [selectedObject, setSelectedObject] = useState(null);
   const [showDetailsPage, setShowDetailsPage] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedOption, setSelectedOption] = useState('codigo');
+
 
   useEffect(() => {
     fetchObjectDetails();
@@ -21,14 +22,20 @@ const ObjectDetailsPage = (props) => {
     try {
       const response = await axios.get(`http://localhost:8080/pecas/codigo/${codigoPeca}`);
       const objectDetails = response.data;
-      setObjectDetails(objectDetails);
+      if(Array.isArray(objectDetails) && objectDetails.length >= 0){
+        handleBack();
+        return
+      } else {
+        setObjectDetails(objectDetails);
+      }    
+  
     } catch (error) {
       console.error(error);
     }
   };
 
   const handleBack = () => {
-    history('/inicio')
+    navigate('/inicio')
   };
   return (
     <div>

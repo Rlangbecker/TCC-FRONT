@@ -17,16 +17,16 @@ const SearchBar = ({ searchTerm,
         return;
       } else if (selectedOption === 'codigo') {
         navigate(`/detalhes/${searchTerm}`);
+        onDataReceived([]);
       } else if (selectedOption === 'referencia') {
         navigate(`/buscar-referencia/${searchTerm}`);
-    
-  
+        onDataReceived([]);
       } else if (selectedOption === 'nome') {
        
         navigate(`/buscar-nome/${searchTerm}`);
-       
+        onDataReceived([]);
       }
-      onDataReceived([]);
+      
     } catch (error) {
       console.error(error);
     }

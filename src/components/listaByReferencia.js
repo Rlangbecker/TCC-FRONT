@@ -5,19 +5,21 @@ import '../css/lista.css';
 import ObjectDetailsPage from './ObjectDetailsPage';
 import NavigationMenu from './NavigationMenu';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const ListaByReferencia = ({ term }) => {
     const [currentPage, setCurrentPage] = useState(0);
     const [data, setData] = useState([]);
-    const [lenght,setLenght] = useState();
+    const [lenght, setLenght] = useState();
     const { referencia } = useParams();
-    const [pageSize, setPageSize] = useState(0);
+    const [pageSize, setPageSize] = useState(21);
     const [selectedObject, setSelectedObject] = useState(null);
     const [showDetailsPage, setShowDetailsPage] = useState(false);
+    const [showButtons, setShowButtons] = useState(true);
     const [selectedOption, setSelectedOption] = useState('codigo');
     const [searchTerm, setSearchTerm] = useState('');
     const [searchedByCode, setSearchedByCode] = useState(false);
-
+    const navigate = useNavigate();
 
     const fetchPaginatedData = async () => {
         try {
@@ -25,7 +27,7 @@ const ListaByReferencia = ({ term }) => {
                 params: {
                     pagina: currentPage,
                     tamanho: pageSize,
-                    sort: 'codigoPeca',
+                    sort: 'idIdentificador',
                     order: 0,
                 },
             });
@@ -72,7 +74,7 @@ const ListaByReferencia = ({ term }) => {
         setCurrentPage(0);
         setData([]);
         setSearchedByCode(false);
-        fetchPaginatedData();
+        navigate('/inicio')
     };
 
 
@@ -103,34 +105,22 @@ const ListaByReferencia = ({ term }) => {
                                     <div key={objeto.codigoPeca}>
                                         <ObjectCard objeto={objeto} onClick={() => handleObjectClick(objeto)} />
                                     </div>
+
                                 ))
                             ) : (
-                                <p>Nenhum objeto encontrado</p>
+                                <div className='no-products'>
+                                    <p>Nenhuma Peça encontrada</p>
+                                </div>
                             )}
-                        </div>
-                    )}
-                    <div className="pagination-buttons">
-                        <div className="pagination-buttons-container">
-                            {searchedByCode ? (
+
+                            <div className="pagination-buttons-container">
                                 <button className="buttonPageable" onClick={handleBack}>
                                     Voltar
                                 </button>
-                            ) : (
-                                <>
-                                    <button
-                                        className="buttonPageable"
-                                        onClick={() => handlePageChange(-1)}
-                                        disabled={currentPage === 0}>Anterior</button>
+                            </div>
 
-                                    <button
-                                        className="buttonPageable"
-                                        onClick={() => handlePageChange(+1)}
-                                        disabled={(data || []).length < pageSize}>Próximo</button>
-                                </>
-
-                            )}
                         </div>
-                    </div>
+                    )}
                 </div>
             )}
         </div>
