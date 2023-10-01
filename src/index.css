@@ -20,33 +20,28 @@ code {
 .container{
   text-align: center;
 }
-.containerDetalhes{
-margin-top: 50px;
-width: 100vw;
-height: 40vh;
-justify-content: center;
-display: flex;
-}
 
-.containerPecaUnitaria{ 
-  border-radius:10%;
-  width: 350px;
-  background-color: white;
-}
-
-
-.containerPecaUnitaria table {
+.excel-table {
   margin-top: 20px;
-  width: 80%;
+  width: 100%;
   border-collapse: collapse;
 }
-.containerPecaUnitaria th {
-  background-color: #a13e3ec0;
+
+.excel-table th,
+.excel-table td {
+  padding: 8px;
+  text-align: left;
+}
+
+.excel-table th {
+  background-color: #742b2bc0;
   font-weight: bold;
 }
 
-.containerPecaUnitaria tr:nth-child(even) {
+.excel-table tr:nth-child(even) {
   background-color: #727272;
 }
 
-
+.excel-table tr:hover {
+  background-color: #77292946;
+}
