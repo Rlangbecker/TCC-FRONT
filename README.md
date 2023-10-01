@@ -33,7 +33,6 @@ Há dois usuarios previamente criados para testes:
     senha: admin```
 
 * Usuario com ROLE ATENDENTE:
-```
+    ```
     login: Atendente
-      senha: atendente
-```
+    senha: atendente```
