@@ -12,9 +12,11 @@ A Aplicação foi desenvolvida com o foco de poder consultar peças do estoque d
   
 > npm install
 
+
 Irá instalar o ambiente
 
 > npm start
+
 
 
 Irá iniciar o serviço na porta 300
