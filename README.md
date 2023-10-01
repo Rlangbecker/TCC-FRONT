@@ -5,27 +5,44 @@ A Aplicação foi desenvolvida com o foco de poder consultar peças do estoque d
 ## Como rodar a Aplicação Localmente
 
 * Clone este repositório.
+* Necessário ter NODE instalado.
 * Escolha a sua IDE de preferência ( Neste tutorial usarei referências para VsCode ).
 * Abra o projeto com o VsCode a abra um terminal ou use o comando __CTRL + SHIFT + "__
 
   No terminal rode os seguintes comandos:
-
+  
 > npm install
+
+
 Irá instalar o ambiente
 
 > npm start
+
+
+
 Irá iniciar o serviço na porta 300
 
 
-## Tecnolocias Utilizadas
-* __Java 17__
+## Acesasndo o sistema
+
+Há dois usuarios previamente criados para testes:
   
-* __Maven__: é uma poderosa ferramenta de gerenciamento de construção e automação de projetos amplamente utilizada na indústria de desenvolvimento de software. Ele permite que os desenvolvedores definam, construam, testem e gerenciem projetos de software Java (e outras linguagens) de maneira eficiente e padronizada.
+* Usuario com ROLE ADMIN:
+    ```
+    login: Admin
+    senha: admin
+    ```
 
-* __Spring Boot__: é um framework em Java que simplifica o desenvolvimento de aplicações autônomas e robustas. Ele fornece configurações padrão e uma estrutura de projeto que facilita a criação de aplicativos Java de alta qualidade.
+* Usuario com ROLE ATENDENTE:
+    ```
+    login: Atendente
+    senha: atendente
+    ```
 
-* __Spring Data JPA__:  é uma parte do ecossistema Spring que simplifica a interação com bancos de dados relacionais usando Java Persistence API (JPA). Ele fornece um conjunto de abstrações que tornam mais fácil escrever consultas de banco de dados e operações CRUD.
 
-* __Spring Security__: é um módulo do Spring que fornece recursos de segurança para autenticação e autorização em aplicações Java. Ele ajuda a proteger as aplicações contra ameaças comuns, como acesso não autorizado.
+## Tecnolocias Utilizadas
+* __JavaScript__ : é uma linguagem de programação amplamente utilizada para desenvolvimento web. Ela é executada nos navegadores web e permite que os desenvolvedores adicionem interatividade e dinamismo a páginas da web. JavaScript é uma linguagem de alto nível, orientada a objetos e de tipagem fraca.
+  
+* __React__:  é uma biblioteca JavaScript de código aberto mantida pelo Facebook que é usada para criar interfaces de usuário (UI) para aplicações web. É conhecida por sua eficiência e flexibilidade no desenvolvimento de componentes reutilizáveis para interfaces de usuário interativas.
 
-* __Json Web Tokens__: é um padrão aberto para representar informações seguras entre duas partes como um objeto JSON. É frequentemente usado para autenticação e troca segura de informações entre sistemas.
+* __Node__: é uma plataforma de tempo de execução de código aberto construída no motor JavaScript V8 do Google Chrome. Ela permite que os desenvolvedores usem JavaScript no lado do servidor para criar aplicativos web escaláveis e em tempo real.
