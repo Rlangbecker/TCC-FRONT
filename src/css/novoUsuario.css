@@ -1,0 +1,55 @@
+.user-form-newuser {
+  width: 500px;
+  margin: 0 auto;
+  border: 1px solid #222121;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  text-align: center;
+  margin-top: 40px;
+  padding: 50px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+
+}
+
+.input-new-user {
+  width: 60%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+}
+
+
+.select-new-user {
+  width: 35%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+}
+
+
+.botao_cadastro {
+  min-width: 120px;
+  background-color: #f51313;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 auto;
+  margin-top: 60px;
+  display: block;
+}
+
+.botao_cadastro:hover {
+  background-color: #f51313;
+}
