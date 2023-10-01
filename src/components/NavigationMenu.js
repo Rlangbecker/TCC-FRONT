@@ -43,7 +43,7 @@ function NavigationMenu({
     <nav>
       <ul className={menuOpen ? 'open' : ''}>
         <li className='nav-line' id='first-li'>
-          <Link to="/inicio">Início</Link>
+           <Link to="/inicio">Início</Link>
         </li>
         <li className='nav-line' id='second-li'>
           <div className="containerSearch">

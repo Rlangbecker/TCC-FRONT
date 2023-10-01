@@ -20,7 +20,7 @@ function Sidebar({ initialUserList }) {
 
     const searchListUser = () => {
         setIsLoading(true);
-        axios.get('http://localhost:8080/user')
+        axios.get('http://sistemaconsulta-env.eba-qcseqchb.sa-east-1.elasticbeanstalk.com/user')
             .then((response) => {
                 setUserList(response.data);
                 setIsLoading(false);
@@ -33,7 +33,7 @@ function Sidebar({ initialUserList }) {
 
     const searchUserByLogin = () => {
         setIsLoading(true);
-        axios.get(`http://localhost:8080/user/${searchTerm}`)
+        axios.get(`http://sistemaconsulta-env.eba-qcseqchb.sa-east-1.elasticbeanstalk.com/user/${searchTerm}`)
             .then((response) => {
                 setSearchedUser(response.data);
                 setIsLoading(false);

@@ -3,36 +3,65 @@ import axios from 'axios';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import NavigationMenu from './NavigationMenu';
 import '../css/objectDetailsPage.css';
+import { toast } from "react-toastify";
+import LoadingDetails from './loading';
 
-const ObjectDetailsPage = (props) => {
+const ObjectDetailsPage = () => {
   const { codigoPeca } = useParams();
   const [objectDetails, setObjectDetails] = useState(null);
-  const history = useNavigate();
+  const navigate = useNavigate();
   const [selectedObject, setSelectedObject] = useState(null);
   const [showDetailsPage, setShowDetailsPage] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedOption, setSelectedOption] = useState('codigo');
+  const [isShowingButtons, setShowingButton] = useState(true);
+
 
   useEffect(() => {
     fetchObjectDetails();
-  }, []);
+  }, [objectDetails]);
 
   const fetchObjectDetails = async () => {
+    setIsLoading(true);
+    setShowingButton(false);
     try {
-      const response = await axios.get(`http://localhost:8080/pecas/codigo/${codigoPeca}`);
+      const response = await axios.get(`http://sistemaconsulta-env.eba-qcseqchb.sa-east-1.elasticbeanstalk.com/pecas/codigo/${codigoPeca}`);
       const objectDetails = response.data;
       setObjectDetails(objectDetails);
+      setIsLoading(false);
+      setShowingButton(true);
     } catch (error) {
+      handleError();
       console.error(error);
     }
   };
 
   const handleBack = () => {
-    history('/inicio')
+    navigate('/inicio')
   };
+
+  const handleError = () => {
+    handleBack();
+    toast.error('Código invalido!', {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  }
   return (
     <div>
-      <NavigationMenu selectedOption={selectedOption} searchTerm={searchTerm} />
+        <NavigationMenu
+        selectedOption={selectedOption}
+        searchTerm={searchTerm}
+        setSelectedOption={setSelectedOption}
+        setSearchTerm={setSearchTerm}
+      />
       {showDetailsPage ? (
         <div>
           <ObjectDetailsPage
@@ -125,14 +154,21 @@ const ObjectDetailsPage = (props) => {
             <button className='botaoVoltar' onClick={handleBack}>Voltar</button>
           </div>
         ) : (
-          <div>
-            <p>Carregando detalhes do objeto...</p>
-            <button className='botaoVoltar' onClick={handleBack}>Voltar</button>
+          <div className='loading-details'>
+            {isLoading ? (
+              <LoadingDetails/>
+            ) : (
+              <p>Não foi possível carregar, tente novamente.</p>
+            )}
+            {isShowingButtons && (
+              <button className='botaoVoltar' onClick={handleBack}>Voltar</button>
+            )}
           </div>
         )
       )}
     </div>
   );
+  
 }
 
 export default ObjectDetailsPage;

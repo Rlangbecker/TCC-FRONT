@@ -2,31 +2,44 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../css/searchBar.css';
-import ListaByNome from './listaByNome';
+import { toast } from "react-toastify";
 
-const SearchBar = ({ searchTerm,
+const SearchBar = ({
+  searchTerm,
   selectedOption,
   setSearchTerm,
-  setSelectedOption, onDataReceived }) => {
-
+  setSelectedOption}) => {
+  
   const navigate = useNavigate();
 
   const handleSearch = async () => {
     try {
       if (searchTerm === '') {
         return;
-      } else if (selectedOption === 'codigo') {
+      } else if (searchTerm.length > 10) {
+        toast.error('O campo de pesquisa é limitado a 20 caracteres!', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
+          return;
+      }
+      
+      if (selectedOption === 'codigo') {
         navigate(`/detalhes/${searchTerm}`);
       } else if (selectedOption === 'referencia') {
         navigate(`/buscar-referencia/${searchTerm}`);
-    
-  
+
       } else if (selectedOption === 'nome') {
-       
+
         navigate(`/buscar-nome/${searchTerm}`);
-       
       }
-      onDataReceived([]);
+
     } catch (error) {
       console.error(error);
     }

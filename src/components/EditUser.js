@@ -5,7 +5,7 @@ import "../css/editUser.css"
 
 const EditUser = () => {
   const [userData, setUserData] = useState({});
-  const [loginValue, setLoginValue] = useState(''); // Novo estado para o valor do login
+  const [loginValue, setLoginValue] = useState('');
   const [nome, setNome] = useState('');
   const [cargo, setCargo] = useState('');
   const [senha, setSenha] = useState('');
@@ -18,7 +18,7 @@ const EditUser = () => {
   const handleSave = () => {
     setIsLoading(true);
  
-    axios.get(`http://localhost:8080/user/${loginValue}`)
+    axios.get(`http://sistemaconsulta-env.eba-qcseqchb.sa-east-1.elasticbeanstalk.com:8080/user/${loginValue}`)
       .then((response) => {
         const userData = response.data;
         setUserData(userData);

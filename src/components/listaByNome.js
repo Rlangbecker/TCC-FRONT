@@ -8,8 +8,8 @@ import { useParams } from 'react-router-dom';
 
 const ListaByNome = ({ term }) => {
     const [currentPage, setCurrentPage] = useState(0);
-    const [data, setData] = useState([]); // Adicione esta linha
-    const { descricao } = useParams(); // Obtenha "descricao" da rota
+    const [data, setData] = useState([]); 
+    const { descricao } = useParams();
     const [pageSize] = useState(21);
     const [selectedObject, setSelectedObject] = useState(null);
     const [showDetailsPage, setShowDetailsPage] = useState(false);
@@ -20,7 +20,7 @@ const ListaByNome = ({ term }) => {
 
     const fetchPaginatedData = async () => {
         try {
-            const response = await axios.get(`http://localhost:8080/pecas/descricao/${descricao}`, {
+            const response = await axios.get(`http://sistemaconsulta-env.eba-qcseqchb.sa-east-1.elasticbeanstalk.com/pecas/descricao/${descricao}`, {
                 params: {
                     pagina: currentPage,
                     tamanho: pageSize,
@@ -45,7 +45,7 @@ const ListaByNome = ({ term }) => {
 
     const handleObjectClick = async (objeto) => {
         try {
-            const response = await axios.get(`http://localhost:8080/pecas/codigo/${objeto.codigoPeca}`);
+            const response = await axios.get(`http://sistemaconsulta-env.eba-qcseqchb.sa-east-1.elasticbeanstalk.com/pecas/codigo/${objeto.codigoPeca}`);
             const objectDetails = response.data;
             setSelectedObject(objectDetails);
             setShowDetailsPage(true);

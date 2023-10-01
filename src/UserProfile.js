@@ -53,7 +53,7 @@ const UserProfile = () => {
         }
 
         try {
-            const response = axios.put(`http://localhost:8080/user/change-password`, {
+            const response = axios.put(`http://sistemaconsulta-env.eba-qcseqchb.sa-east-1.elasticbeanstalk.com/user/change-password`, {
                 login,
                 senha,
                 novaSenha,

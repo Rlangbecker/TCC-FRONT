@@ -4,6 +4,7 @@ import ObjectCard from './components/ObjectCard';
 import './css/lista.css';
 import ObjectDetailsPage from './components/ObjectDetailsPage';
 import NavigationMenu from './components/NavigationMenu';
+import Load from './components/loading';
 
 const ListaDeProdutos = () => {
   const [data, setData] = useState([]);
@@ -14,10 +15,15 @@ const ListaDeProdutos = () => {
   const [selectedOption, setSelectedOption] = useState('codigo');
   const [searchTerm, setSearchTerm] = useState('');
   const [searchedByCode, setSearchedByCode] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isShowingButtons, setShowingButton] = useState(true);
+
 
   const fetchPaginatedData = async () => {
+    setIsLoading(true);
+    setShowingButton(false);
     try {
-      const response = await axios.get('http://localhost:8080/pecas', {
+      const response = await axios.get('http://sistemaconsulta-env.eba-qcseqchb.sa-east-1.elasticbeanstalk.com/pecas', {
         params: {
           pagina: currentPage,
           tamanho: pageSize,
@@ -28,6 +34,8 @@ const ListaDeProdutos = () => {
       console.log('Dados buscados:', response.data);
       console.log('Pagina atual:', currentPage);
       setData(response.data.elementos);
+      setIsLoading(false);
+      setShowingButton(true);
     } catch (error) {
       console.error('Erro ao buscar dados:', error);
     }
@@ -40,7 +48,7 @@ const ListaDeProdutos = () => {
 
   const handleObjectClick = async (objeto) => {
     try {
-      const response = await axios.get(`http://localhost:8080/pecas/codigo/${objeto.codigoPeca}`);
+      const response = await axios.get(`http://sistemaconsulta-env.eba-qcseqchb.sa-east-1.elasticbeanstalk.com/pecas/codigo/${objeto.codigoPeca}`);
       const objectDetails = response.data;
       setSelectedObject(objectDetails);
       setShowDetailsPage(true);
@@ -88,14 +96,18 @@ const ListaDeProdutos = () => {
         <div>
           {!selectedObject && (
             <div className="object-card-list">
-              {data && data.length > 0 ? (
+              {isLoading ? (
+                <div className='loading-list'>
+                  <Load />
+                </div>
+              ) : data && data.length > 0 ? (
                 data.map((objeto) => (
                   <div key={objeto.codigoPeca}>
                     <ObjectCard objeto={objeto} onClick={() => handleObjectClick(objeto)} />
                   </div>
                 ))
               ) : (
-                <p>Nenhum objeto encontrado</p>
+                <p>Nenhuma peça Encontrada</p>
               )}
             </div>
           )}
@@ -107,15 +119,25 @@ const ListaDeProdutos = () => {
                 </button>
               ) : (
                 <>
-                  <button
-                    className="buttonPageable"
-                    onClick={() => handlePageChange(-1)}
-                    disabled={currentPage === 0}>Anterior</button>
-
-                  <button
-                    className="buttonPageable"
-                    onClick={() => handlePageChange(+1)}
-                    disabled={data.length < pageSize}>Próximo</button>
+                  {isShowingButtons && (
+                    <>
+                      <button
+                        className="buttonPageable"
+                        onClick={() => handlePageChange(-1)}
+                        disabled={currentPage === 0}
+                      >
+                        Anterior
+                      </button>
+  
+                      <button
+                        className="buttonPageable"
+                        onClick={() => handlePageChange(+1)}
+                        disabled={data.length < pageSize}
+                      >
+                        Próximo
+                      </button>
+                    </>
+                  )}
                 </>
               )}
             </div>
@@ -124,6 +146,7 @@ const ListaDeProdutos = () => {
       )}
     </div>
   );
+  
 }
 
 export default ListaDeProdutos;

@@ -9,7 +9,7 @@ const UserList = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('http://localhost:8080/user')
+    axios.get('http://sistemaconsulta-env.eba-qcseqchb.sa-east-1.elasticbeanstalk.com:8080/user')
       .then((response) => {
         setUserList(response.data);
         setIsLoading(false);

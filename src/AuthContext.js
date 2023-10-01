@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
 
   const handleLogin = async (login, senha) => {
     try {
-      const response = await axios.post('http://localhost:8080/auth/login', { login, senha });
+      const response = await axios.post('http://sistemaconsulta-env.eba-qcseqchb.sa-east-1.elasticbeanstalk.com/auth/login', { login, senha });
   
       const statusCode = response.status;
       const responseData = response.data;
@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
-            pauseOnHover: true,
+            pauseOnHover: false,
             draggable: true,
             progress: undefined,
             theme: "light",

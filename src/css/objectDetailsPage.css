@@ -10,11 +10,20 @@
   align-items: center;
   justify-content: space-evenly;
   height: 100vh;
-  width: 90vw;
+  width: 99vw;
   padding: 20px;
   box-sizing: border-box;
   overflow-x: hidden;
   min-width: 30%;
+}
+
+.loading-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
 }
 
 .object-card-detail {
@@ -46,11 +55,11 @@
   max-width: 100%;
 }
 
-.codigoPeca{
+.codigoPeca {
   font-weight: bold;
 }
 
-.descricaoPeca{
+.descricaoPeca {
   font-weight: bold;
 }
 
@@ -59,7 +68,7 @@
 }
 
 .botaoVoltar {
-  display: flexbox;
+  margin: 0 auto;
   background-color: #d40303;
   color: white;
   padding: 10px 20px;
@@ -67,7 +76,6 @@
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  width: fit-content;
   min-width: 80px;
   align-self: center;
 }

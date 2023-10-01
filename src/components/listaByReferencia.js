@@ -5,27 +5,28 @@ import '../css/lista.css';
 import ObjectDetailsPage from './ObjectDetailsPage';
 import NavigationMenu from './NavigationMenu';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const ListaByReferencia = ({ term }) => {
     const [currentPage, setCurrentPage] = useState(0);
     const [data, setData] = useState([]);
-    const [lenght,setLenght] = useState();
+    const [lenght, setLenght] = useState();
     const { referencia } = useParams();
-    const [pageSize, setPageSize] = useState(0);
+    const [pageSize, setPageSize] = useState(21);
     const [selectedObject, setSelectedObject] = useState(null);
     const [showDetailsPage, setShowDetailsPage] = useState(false);
-    const [selectedOption, setSelectedOption] = useState('codigo');
+    const [selectedOption, setSelectedOption] = useState('referencia');
     const [searchTerm, setSearchTerm] = useState('');
     const [searchedByCode, setSearchedByCode] = useState(false);
-
+    const navigate = useNavigate();
 
     const fetchPaginatedData = async () => {
         try {
-            const response = await axios.get(`http://localhost:8080/pecas/referencia/${referencia}`, {
+            const response = await axios.get(`http://sistemaconsulta-env.eba-qcseqchb.sa-east-1.elasticbeanstalk.com/pecas/referencia/${referencia}`, {
                 params: {
                     pagina: currentPage,
                     tamanho: pageSize,
-                    sort: 'codigoPeca',
+                    sort: 'IdIdentificador',
                     order: 0,
                 },
             });
@@ -51,7 +52,7 @@ const ListaByReferencia = ({ term }) => {
 
     const handleObjectClick = async (objeto) => {
         try {
-            const response = await axios.get(`http://localhost:8080/pecas/codigo/${objeto.codigoPeca}`);
+            const response = await axios.get(`http://sistemaconsulta-env.eba-qcseqchb.sa-east-1.elasticbeanstalk.com/pecas/codigo/${objeto.codigoPeca}`);
             const objectDetails = response.data;
             setSelectedObject(objectDetails);
             setShowDetailsPage(true);
@@ -73,6 +74,7 @@ const ListaByReferencia = ({ term }) => {
         setData([]);
         setSearchedByCode(false);
         fetchPaginatedData();
+        navigate('/inicio')
     };
 
 
@@ -104,6 +106,7 @@ const ListaByReferencia = ({ term }) => {
                                         <ObjectCard objeto={objeto} onClick={() => handleObjectClick(objeto)} />
                                     </div>
                                 ))
+
                             ) : (
                                 <p>Nenhum objeto encontrado</p>
                             )}
@@ -111,24 +114,11 @@ const ListaByReferencia = ({ term }) => {
                     )}
                     <div className="pagination-buttons">
                         <div className="pagination-buttons-container">
-                            {searchedByCode ? (
-                                <button className="buttonPageable" onClick={handleBack}>
-                                    Voltar
-                                </button>
-                            ) : (
-                                <>
-                                    <button
-                                        className="buttonPageable"
-                                        onClick={() => handlePageChange(-1)}
-                                        disabled={currentPage === 0}>Anterior</button>
 
-                                    <button
-                                        className="buttonPageable"
-                                        onClick={() => handlePageChange(+1)}
-                                        disabled={(data || []).length < pageSize}>Próximo</button>
-                                </>
+                            <button className="buttonPageable" onClick={handleBack}>
+                                Voltar
+                            </button>
 
-                            )}
                         </div>
                     </div>
                 </div>

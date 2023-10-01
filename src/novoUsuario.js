@@ -36,7 +36,7 @@ const NovoUsuario = () => {
         };
 
         try {
-            const response = await axios.post('http://localhost:8080/auth/register', userData, {
+            const response = await axios.post('http://sistemaconsulta-env.eba-qcseqchb.sa-east-1.elasticbeanstalk.com:8080/auth/register', userData, {
         headers: {
             'Content-Type': 'application/json',
         },
