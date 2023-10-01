@@ -30,9 +30,11 @@ Há dois usuarios previamente criados para testes:
 * Usuario com ROLE ADMIN:
     ```
     login: Admin
-    senha: admin```
+    senha: admin
+```
 
 * Usuario com ROLE ATENDENTE:
     ```
     login: Atendente
-    senha: atendente```
+    senha: atendente
+```
