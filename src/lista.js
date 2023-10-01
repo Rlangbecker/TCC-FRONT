@@ -59,8 +59,7 @@ const ListaDeProdutos = () => {
   };
 
   const handlePageChange = (amount) => {
-    setCurrentPage((prevPage) => prevPage + amount);
-    fetchPaginatedData();
+    setCurrentPage((currentPage) => currentPage + amount);
   };
 
 

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
-import jwtDecode from 'jwt-decode';
+import React, { useState } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ObjectDetailsPage from '../components/ObjectDetailsPage';
 import Login from '../components/Login';
 import ListaDeProdutos from '../lista';

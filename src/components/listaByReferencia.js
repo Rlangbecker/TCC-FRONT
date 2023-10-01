@@ -68,7 +68,6 @@ const ListaByReferencia = ({ term }) => {
 
     const handlePageChange = (amount) => {
         setCurrentPage((prevPage) => prevPage + amount);
-        fetchPaginatedData();
     };
 
 
