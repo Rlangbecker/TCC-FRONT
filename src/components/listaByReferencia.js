@@ -7,18 +7,22 @@ import NavigationMenu from './NavigationMenu';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
+
 const ListaByReferencia = ({ term }) => {
     const [currentPage, setCurrentPage] = useState(0);
     const [data, setData] = useState([]);
     const [lenght, setLenght] = useState();
+
     const { referencia } = useParams();
     const [pageSize, setPageSize] = useState(21);
+
     const [selectedObject, setSelectedObject] = useState(null);
     const [showDetailsPage, setShowDetailsPage] = useState(false);
     const [selectedOption, setSelectedOption] = useState('referencia');
     const [searchTerm, setSearchTerm] = useState('');
     const [searchedByCode, setSearchedByCode] = useState(false);
     const navigate = useNavigate();
+
 
     const fetchPaginatedData = async () => {
         try {

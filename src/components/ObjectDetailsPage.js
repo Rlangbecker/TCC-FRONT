@@ -39,6 +39,7 @@ const ObjectDetailsPage = () => {
 
   const handleBack = () => {
     navigate('/inicio')
+    navigate('/inicio')
   };
 
   const handleError = () => {
