@@ -28,9 +28,12 @@ Irá iniciar o serviço na porta 300
 Há dois usuarios previamente criados para testes:
   
 * Usuario com ROLE ADMIN:
+    ```
     login: Admin
-    senha: admin
+    senha: admin```
 
 * Usuario com ROLE ATENDENTE:
-      login: Atendente
+```
+    login: Atendente
       senha: atendente
+```
