@@ -23,7 +23,7 @@ Irá instalar o ambiente
 Irá iniciar o serviço na porta 300
 
 
-## Utilizando o sistema
+## Acesasndo o sistema
 
 Há dois usuarios previamente criados para testes:
   
@@ -38,3 +38,11 @@ Há dois usuarios previamente criados para testes:
     login: Atendente
     senha: atendente
     ```
+
+
+## Tecnolocias Utilizadas
+* __JavaScript__ : é uma linguagem de programação amplamente utilizada para desenvolvimento web. Ela é executada nos navegadores web e permite que os desenvolvedores adicionem interatividade e dinamismo a páginas da web. JavaScript é uma linguagem de alto nível, orientada a objetos e de tipagem fraca.
+  
+* __React__:  é uma biblioteca JavaScript de código aberto mantida pelo Facebook que é usada para criar interfaces de usuário (UI) para aplicações web. É conhecida por sua eficiência e flexibilidade no desenvolvimento de componentes reutilizáveis para interfaces de usuário interativas.
+
+* __Node__: é uma plataforma de tempo de execução de código aberto construída no motor JavaScript V8 do Google Chrome. Ela permite que os desenvolvedores usem JavaScript no lado do servidor para criar aplicativos web escaláveis e em tempo real.
