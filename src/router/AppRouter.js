@@ -65,6 +65,9 @@ function AppRouter() {
                 path="/editar-usuario"
                 element={<UserList />} />
 
+              {/* <Route path="/novo-usuario" element={<InternalRoutes.NewUserRoute />} /> */}
+
+
               <Route element={<InternalRoutes.NewUserRoute />}>
                 <Route
                   path="/novo-usuario"

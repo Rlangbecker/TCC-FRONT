@@ -33,7 +33,9 @@ export function UserDetaisRoute() {
 export function NewUserRoute() {
     const { roles } = useAuth();
 
-    if (roles.length > 0) {
-        return roles.some((role) => role === 'ROLE_ADMIN') ? (<Outlet />) : <Navigate to='/inicio' />
+    if (roles.includes('ROLE_ADMIN')) {
+        return <Outlet />;
+    } else {
+        return <Navigate to="/inicio" />;
     }
 }

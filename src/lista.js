@@ -5,6 +5,7 @@ import './css/lista.css';
 import ObjectDetailsPage from './components/ObjectDetailsPage';
 import NavigationMenu from './components/NavigationMenu';
 import Load from './components/loading';
+import { useNavigate } from 'react-router-dom';
 
 const ListaDeProdutos = () => {
   const [data, setData] = useState([]);
@@ -17,7 +18,6 @@ const ListaDeProdutos = () => {
   const [searchedByCode, setSearchedByCode] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isShowingButtons, setShowingButton] = useState(true);
-
 
   const fetchPaginatedData = async () => {
     setIsLoading(true);
@@ -43,6 +43,8 @@ const ListaDeProdutos = () => {
 
   useEffect(() => {
     console.log('ListaDeProdutos componentDidMount');
+    
+    localStorage.setItem('role',localStorage.getItem('role'))
     fetchPaginatedData();
   }, [currentPage]);
 

@@ -28,10 +28,12 @@ function Login() {
     const handleInputPasswordClick = () => {
         setPlaceholderPassword("");
     };
+     useEffect(() => {
+        if (localStorage.getItem('token')) {
+            navigate('/inicio');
+        }
+     })
 
-    if (localStorage.getItem('token')) {
-        navigate('/inicio');
-    }
 
     return (
         <div className="login-container">

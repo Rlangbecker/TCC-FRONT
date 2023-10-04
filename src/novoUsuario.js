@@ -29,9 +29,9 @@ const NovoUsuario = () => {
     const handleSubmit = async () => {
        
         const userData = {
-            nome,
             login,
             senha,
+            nome,
             role,
         };
 

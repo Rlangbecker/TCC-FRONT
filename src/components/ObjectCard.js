@@ -25,7 +25,7 @@ class ObjectCard extends Component {
 
           <div className='footer_card'>
             <p className="quantidade_card">Qt: {objeto.estoqueEntity.quantidadePeca}</p>
-            <p className='valorPeca_card'>R$ {objeto.precoVenda}</p>
+            <p className='valorPeca_card'>R$ {objeto.precoVenda.toFixed(2)}</p>
           </div>
         
         </div>

@@ -12,35 +12,6 @@ function UserDetails({ user, senha, setSenha, novaSenha, setNovaSenha, onClose }
     
 
     const handleChangePassword = () => {
-        if (!senha || !novaSenha) {
-            toast.warn('Por favor, preencha a senha atual e a nova senha.', {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
-
-            return;
-        }
-
-        if (senha === novaSenha) {
-            toast.warn('As senhas não podem ser iguais!', {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
-            return;
-        }
-
         try {
             const response = axios.put(`http://sistemaconsulta-env.eba-qcseqchb.sa-east-1.elasticbeanstalk.com/user/change-password-from-user`, {
                 login,
