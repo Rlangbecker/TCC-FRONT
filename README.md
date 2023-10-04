@@ -23,7 +23,7 @@ Irá instalar o ambiente
 Irá iniciar o serviço na porta 300
 
 
-## Acesasndo o sistema
+## Acessando o sistema
 
 Há dois usuarios previamente criados para testes:
   
